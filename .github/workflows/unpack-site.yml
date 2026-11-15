@@ -1,0 +1,25 @@
+name: Publish Rachny Dvor site
+
+on:
+  push:
+    paths:
+      - ".staging/rachdvor-project.zip"
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack site files
+        run: |
+          unzip -o .staging/rachdvor-project.zip
+          cp -a rachniy-dvor-site/. .
+          rm -rf .staging rachniy-dvor-site
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add Rachny Dvor website and order API"
+          git push
