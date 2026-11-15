@@ -3,7 +3,7 @@ import { requireAdmin, adminJson } from "../_lib/admin-auth.js";
 const ALLOWED = new Set(["Новый", "Принят", "Готовится", "Выполнен", "Отменён"]);
 
 export async function onRequestPatch({ request, env }) {
-  const denied = requireAdmin(request, env);
+  const denied = await requireAdmin(request, env);
   if (denied) return denied;
 
   let data;
