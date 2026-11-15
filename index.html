@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#11120f">
+<meta name="description" content="Рачный двор — варёные раки для домашнего вечера, встречи с друзьями и большого стола. Выберите формат и уточните наличие.">
+<title>Рачный двор — варёные раки для вашего стола</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--bg:#11120f;--surface:#1b1d19;--surface2:#23251f;--gold:#d8b66e;--gold-light:#f0d99d;--white:#f7f3e9;--muted:#b9b8ad;--line:#383a31;--r:24px;--max:1160px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--bg);color:var(--white);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}img{display:block;width:100%;object-fit:cover}button,input,select{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.eyebrow{color:var(--gold);font-size:.75rem;font-weight:850;letter-spacing:.19em;text-transform:uppercase}.muted{color:var(--muted)}.section{padding:88px 0}.head{max-width:700px;margin-bottom:36px}.head h2{font-size:clamp(2rem,5vw,3.6rem);line-height:1.04;letter-spacing:-.05em;margin:12px 0}.head p{color:var(--muted);margin:0}.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;min-height:54px;padding:0 25px;border:1px solid var(--gold);border-radius:999px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#19180f;font-weight:850;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}.btn.ghost{background:transparent;color:var(--white);border-color:#68614c}.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
+header{position:sticky;top:0;z-index:20;background:#11120feF;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff12}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:22px}.logo{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.1em;font-size:1.12rem;line-height:1}.logo img{width:42px;height:38px;object-fit:contain}.logo small{display:block;font-size:.57rem;letter-spacing:.3em;color:var(--gold);margin-top:5px}.links{display:flex;gap:26px;color:#d1d0c6;font-size:.9rem}.links a:hover{color:var(--gold-light)}.nav>.btn{min-height:44px;padding:0 19px;font-size:.88rem}.menu{display:none;background:none;color:var(--white);border:1px solid var(--line);border-radius:12px;padding:10px}
+.hero{position:relative;overflow:hidden;padding:70px 0 82px;background:radial-gradient(ellipse at 78% 45%,#98702a38,transparent 39%),linear-gradient(120deg,#11120f,#1b1b15)}.hero:after{content:"";position:absolute;width:480px;height:480px;border:1px solid #d8b66e20;border-radius:50%;right:-230px;top:-260px}.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;min-height:500px}.hero h1{font-size:clamp(3rem,6.5vw,5.8rem);line-height:.96;letter-spacing:-.07em;margin:18px 0 24px;max-width:680px}.hero h1 span{color:var(--gold-light)}.hero-copy{max-width:550px;color:#cfcdc2;font-size:1.08rem}.actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}.micro{font-size:.82rem;color:#aaa99e;margin-top:20px}.hero-photo{height:460px;position:relative;overflow:hidden;border:1px solid #d8b66e55;border-radius:34px;background:#27271f}.hero-photo img{height:100%;filter:saturate(.9);opacity:.88}.hero-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0d0e0dbd,transparent 60%)}.photo-caption{position:absolute;z-index:1;left:27px;right:27px;bottom:24px}.photo-caption b{font-size:1.4rem;display:block}.photo-caption span{color:#e4dac4;font-size:.9rem}
+.strip{background:#151713;border-block:1px solid var(--line)}.strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:21px 0}.strip-item{display:flex;align-items:center;gap:12px;color:#dedbd0;font-size:.9rem}.strip-icon{display:grid;place-items:center;width:38px;height:38px;flex:none;border:1px solid #766644;border-radius:50%;color:var(--gold)}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.occasion,.feature,.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}.num{font-size:.76rem;font-weight:900;letter-spacing:.15em;color:var(--gold)}.occasion h3,.feature h3,.step h3{margin:12px 0 7px;font-size:1.12rem}.occasion p,.feature p,.step p{margin:0;color:var(--muted);font-size:.93rem}
+.story{background:linear-gradient(130deg,#1c1e19,#141611);border-block:1px solid var(--line)}.story-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:52px;align-items:center}.story-photo{height:390px;border-radius:28px;overflow:hidden;border:1px solid #786744}.story-photo img{height:100%}.story h2{font-size:clamp(2rem,4.5vw,3.5rem);line-height:1.03;letter-spacing:-.05em;margin:12px 0 18px}.story-list{display:grid;gap:13px;margin:24px 0 28px}.story-list div{display:flex;gap:12px;color:#e8e5da}.tick{color:var(--gold);font-weight:900}
+.catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.product{background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden}.product img{height:220px}.product-body{padding:22px}.product h3{margin:0 0 7px;font-size:1.2rem}.product p{color:var(--muted);font-size:.9rem;margin:0 0 15px}.details-link{display:block;color:var(--gold-light);font-size:.82rem;margin:0 0 10px;text-decoration:underline;text-underline-offset:3px}.tag{display:inline-block;padding:5px 10px;border-radius:999px;background:#d8b66e18;color:var(--gold-light);font-size:.73rem;font-weight:800;margin-bottom:12px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:.8rem;color:#c9c6ba}.field input,.field select{width:100%;min-height:45px;border:1px solid #4a4b40;border-radius:11px;background:#11130f;color:var(--white);padding:9px 11px}.product .btn{width:100%;min-height:47px;margin-top:7px}.hint{font-size:.78rem;color:#99998e;margin-top:16px}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature{padding:21px}.feature-icon{font-size:1.45rem;color:var(--gold)}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{padding:22px}
+.conditions{background:#171914;border-block:1px solid var(--line)}.condition-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.condition{padding:20px;border:1px dashed #716344;border-radius:18px}.condition b{display:block;color:var(--gold-light);margin-bottom:5px}.condition span{font-size:.87rem;color:var(--muted)}
+.faq{max-width:850px}.faq details{background:var(--surface);border:1px solid var(--line);border-radius:17px;margin:10px 0}.faq summary{cursor:pointer;list-style:none;position:relative;padding:19px 52px 19px 21px;font-weight:750}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";position:absolute;right:21px;top:12px;font-size:1.5rem;color:var(--gold)}.faq details[open] summary:after{content:"−"}.answer{padding:0 21px 20px;color:var(--muted)}
+.contact{padding:78px 0;text-align:center;background:radial-gradient(ellipse at 50% 120%,#b88c3b35,transparent 60%),#181a15}.contact-inner{max-width:760px;margin:auto}.contact h2{font-size:clamp(2.3rem,5.5vw,4.2rem);line-height:1.02;letter-spacing:-.055em;margin:13px 0 17px}.contact p{color:var(--muted);max-width:590px;margin:0 auto 26px}.contact-detail{margin-top:22px;color:#c6c3b8;font-size:.92rem}.contact-detail a{color:var(--gold-light);text-decoration:underline;text-underline-offset:3px}
+footer{padding:26px 0 30px;border-top:1px solid var(--line);font-size:.82rem;color:#9c9b91}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.mobile-cta{display:none}
+
+
+.hp-field{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}.cart-summary{border-top:1px solid var(--line);padding-top:14px;margin:8px 0 18px}
+.cart-summary>div{display:flex;justify-content:space-between;gap:14px;padding:7px 0;color:var(--muted)}
+.cart-summary strong{color:var(--text);font-variant-numeric:tabular-nums}
+.cart-summary .grand{border-top:1px solid var(--line);margin-top:6px;padding-top:13px;font-size:1.08rem;color:var(--text)}
+.cart-summary .grand strong{color:var(--gold-light);font-size:1.2rem}
+
+.cart-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+.cart-panel,.order-form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.cart-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:15px}
+.cart-items{display:grid;gap:10px;margin-bottom:18px}
+.cart-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:13px 14px;border:1px solid var(--line);border-radius:14px;background:#11130f}
+.cart-row b{display:block;font-size:.95rem}.cart-row small{color:var(--muted)}
+.cart-remove{border:1px solid #665c45;background:transparent;color:var(--gold-light);border-radius:999px;padding:7px 11px;cursor:pointer}
+.cart-empty{padding:12px 0}
+.order-form h3{margin:0 0 5px;font-size:1.25rem}.order-form>p{margin:0 0 16px;font-size:.88rem}
+.order-form textarea{width:100%;resize:vertical;border:1px solid #4a4b40;border-radius:11px;background:#11130f;color:var(--white);padding:10px 11px;font:inherit}
+.order-form .btn{width:100%;margin-top:6px}.form-status{color:var(--gold-light);font-size:.85rem;margin-top:12px!important;min-height:1.2em}
+#cartCount{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:var(--gold);color:#171710;font-size:.72rem;font-weight:900}
+@media(max-width:900px){.cart-layout{grid-template-columns:1fr}}
+
+@media(max-width:900px){.hero-grid,.story-grid{grid-template-columns:1fr}.hero-grid{gap:30px}.hero-photo{height:390px}.catalog{grid-template-columns:repeat(2,1fr)}.features,.steps{grid-template-columns:repeat(2,1fr)}.condition-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.wrap{width:calc(100% - 30px)}.section{padding:62px 0}.nav{height:68px}.menu{display:block}.links{display:none;position:absolute;top:68px;left:0;right:0;padding:14px 22px 20px;background:#151713;border-bottom:1px solid var(--line);flex-direction:column;gap:0}.links.open{display:flex}.links a{padding:12px 0}.nav>.btn{display:none}.hero{padding:48px 0 56px}.hero-grid{min-height:0}.hero h1{font-size:clamp(2.8rem,13vw,4.3rem)}.hero-copy{font-size:1rem}.hero-photo{height:300px}.strip-grid{grid-template-columns:1fr;gap:11px;padding:17px 0}.cards3,.catalog{grid-template-columns:1fr}.product img{height:225px}.story-grid{gap:27px}.story-photo{height:270px}.features,.steps,.condition-grid{grid-template-columns:1fr 1fr}.occasion,.feature,.step{padding:19px}.contact{padding:62px 0 90px}.mobile-cta{display:flex;position:fixed;z-index:30;bottom:12px;left:12px;right:12px;padding:8px;background:#20211ded;border:1px solid #766644;border-radius:999px;backdrop-filter:blur(12px)}.mobile-cta .btn{width:100%;min-height:48px}footer{padding-bottom:85px}}
+@media(max-width:380px){.features,.steps,.condition-grid{grid-template-columns:1fr}.actions .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#top" aria-label="Рачный двор — на главную"><img src="logo.svg" alt="" width="44" height="38"><span>РАЧНЫЙ ДВОР<small>ВКУС, РАДИ КОТОРОГО СОБИРАЮТСЯ</small></span></a>
+<button class="menu" type="button" aria-expanded="false" aria-controls="navlinks">Меню ☰</button>
+<nav class="links" id="navlinks" aria-label="Основная навигация"><a href="catalog.html">Каталог</a><a href="#story">О нас</a><a href="#order">Как заказать</a><a href="#faq">Вопросы</a><a href="#cart">Заявка <span id="cartCount">0</span></a></nav>
+<a class="btn" href="#contacts">Уточнить наличие</a>
+</div></header>
+<main id="top">
+<section class="hero"><div class="wrap hero-grid">
+<div><div class="eyebrow">Варёные раки · гастрономия для компании</div>
+<h1>Вкус, ради которого <span>собираются.</span></h1>
+<p class="hero-copy">Варёные раки для уютного вечера, встречи с друзьями и большого стола. Выберите подходящий формат, уточните наличие и согласуйте заказ напрямую.</p>
+<div class="actions"><a class="btn" href="catalog.html">Выбрать раков <span>↗</span></a><a class="btn ghost" href="#order">Как это работает</a></div>
+<p class="micro">Наличие, вес, стоимость и получение подтверждаются перед оформлением.</p></div>
+<div class="hero-photo"><img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1300&q=85" alt="Аппетитная подача морепродуктов" fetchpriority="high"><div class="photo-caption"><b>Соберите свой вкусный вечер</b><span>Выбор · заказ · согласование деталей</span></div></div>
+</div></section>
+<div class="strip"><div class="wrap strip-grid"><div class="strip-item"><span class="strip-icon">01</span>Подбор под ваш повод</div><div class="strip-item"><span class="strip-icon">02</span>Понятные условия до оплаты</div><div class="strip-item"><span class="strip-icon">03</span>Заказ без лишних шагов</div></div></div>
+<section class="section"><div class="wrap"><div class="head"><div class="eyebrow">Для хороших поводов</div><h2>Какой вечер планируете?</h2><p>Подскажем, с чего начать выбор. Количество и доступные варианты согласуем отдельно.</p></div>
+<div class="cards3">
+<article class="occasion"><span class="num">01 / ДОМАШНИЙ ВЕЧЕР</span><h3>Для двоих или семьи</h3><p>Небольшое гастрономическое удовольствие без повода — просто чтобы вечер стал особенным.</p></article>
+<article class="occasion"><span class="num">02 / ДРУЗЬЯ</span><h3>Для дружеской компании</h3><p>Общий стол, разговоры и блюдо, которое хочется разделить с близкими.</p></article>
+<article class="occasion"><span class="num">03 / ПРАЗДНИК</span><h3>Для большого стола</h3><p>Заранее обсудите нужное количество, дату и возможность подготовить заказ.</p></article>
+</div></div></section>
+<section class="section story" id="story"><div class="wrap story-grid">
+<div class="story-photo"><img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=1100&q=80" alt="Подача блюда из морепродуктов" loading="lazy"></div>
+<div><div class="eyebrow">Философия Рачного двора</div><h2>Не просто покупка. Повод собраться за одним столом.</h2><p class="muted">Мы делаем выбор понятным: вы рассказываете, для какого случая нужны раки, а перед заказом уточняете доступные варианты и все важные детали.</p>
+<div class="story-list"><div><span class="tick">✓</span><span>Подберите категорию и ориентировочный объём.</span></div><div><span class="tick">✓</span><span>Уточните состав, способ приготовления и упаковку.</span></div><div><span class="tick">✓</span><span>Согласуйте итоговую стоимость и способ получения.</span></div></div>
+<a class="btn" href="catalog.html">Посмотреть варианты</a></div>
+</div></section>
+<section class="section" id="catalog"><div class="wrap">
+<div class="head"><div class="eyebrow">Ассортимент</div><h2>Выберите формат своего заказа</h2><p>Это стартовая структура каталога. Перед публикацией владелец должен заменить названия, фотографии и параметры на фактические позиции.</p></div>
+<div class="catalog">
+<article class="product"><a class="product-link" href="product.html?id=classic" aria-label="Подробнее о классическом выборе"><img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=900&q=80" alt="Демонстрационная подача морепродуктов" loading="lazy"></a><div class="product-body"><span class="tag">ПОПУЛЯРНЫЙ ФОРМАТ</span><a class="details-link" href="product.html?id=classic">Подробнее о позиции →</a><h3>Классический выбор</h3><p>Базовая категория для тех, кто хочет заказать варёных раков к домашнему столу.</p><div class="field"><label for="cat1">Размер / категория</label><select id="cat1"><option>Уточнить доступные варианты</option><option>Мелкие</option><option>Средние</option><option>Крупные</option></select></div><div class="field"><label for="qty1">Количество или вес</label><input id="qty1" placeholder="Например, 1 кг"></div><button class="btn add-to-cart" data-name="Классический выбор">Добавить в заявку</button></div></article>
+<article class="product"><img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80" alt="Блюдо для общего стола" loading="lazy"><div class="product-body"><span class="tag">ДЛЯ КОМПАНИИ</span><a class="details-link" href="product.html?id=company">Подробнее о позиции →</a><h3>Большой стол</h3><p>Формат для встречи с друзьями или семейного праздника. Объём согласуется индивидуально.</p><div class="field"><label for="cat2">Предпочтение</label><select id="cat2"><option>Уточнить доступные варианты</option><option>Один размер</option><option>Разные размеры</option></select></div><div class="field"><label for="qty2">Количество или вес</label><input id="qty2" placeholder="Укажите ориентир"></div><button class="btn add-to-cart" data-name="Большой стол">Добавить в заявку</button></div></article>
+<article class="product"><img src="https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=900&q=80" alt="Праздничная сервировка" loading="lazy"><div class="product-body"><span class="tag">ПОД ВАШ ПОВОД</span><a class="details-link" href="product.html?id=custom">Подробнее о позиции →</a><h3>Индивидуальный заказ</h3><p>Расскажите, на какую дату и для какого количества гостей планируете заказ.</p><div class="field"><label for="cat3">Повод</label><select id="cat3"><option>Уточнить с продавцом</option><option>Домашний вечер</option><option>Встреча с друзьями</option><option>Праздник</option></select></div><div class="field"><label for="qty3">Количество гостей</label><input id="qty3" placeholder="Например, 6 человек"></div><button class="btn add-to-cart" data-name="Индивидуальный заказ">Добавить в заявку</button></div></article>
+</div><p class="hint">Фотографии демонстрационные. Размеры, наличие, цены и состав не заявляются до подтверждения владельцем.</p>
+</div></section>
+
+<section class="section conditions" id="cart">
+<div class="wrap">
+  <div class="head"><div class="eyebrow">Ваша заявка</div><h2>Соберите заказ в одном месте</h2><p>Добавьте нужные позиции из каталога, проверьте выбранные варианты и отправьте запрос продавцу. Цена и наличие подтверждаются отдельно.</p></div>
+  <div class="cart-layout">
+    <div class="cart-panel">
+      <div class="cart-top"><strong>Выбранные позиции</strong><span id="cartStatus" class="muted">Пока ничего не добавлено</span></div>
+      <div id="cartItems" class="cart-items"><p class="muted cart-empty">Каталог выше — выберите интересующие вас варианты.</p></div>
+      <div class="cart-summary">
+        <div><span>Товары</span><strong id="itemsTotal">Уточняется</strong></div>
+        <div><span>Доставка</span><strong id="deliveryTotal">Уточняется</strong></div>
+        <div class="grand"><span>Итого</span><strong id="grandTotal">Уточняется</strong></div>
+        <p class="hint" id="priceHint">Итог появится после заполнения цен в каталоге и условий доставки.</p>
+      </div>
+      <button type="button" class="btn ghost" id="clearCart">Очистить список</button>
+    </div>
+    <form id="orderForm" class="order-form">
+      <h3>Куда ответить?</h3>
+      <p class="muted">Оставьте контакт и удобный способ связи. Не отправляйте платёжные данные.</p>
+      <div class="hp-field" aria-hidden="true"><label for="website">Не заполняйте это поле</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <div class="field"><label for="customerName">Ваше имя</label><input id="customerName" name="name" autocomplete="name" placeholder="Как к вам обращаться"></div>
+      <div class="field"><label for="customerPhone">Телефон или мессенджер</label><input id="customerPhone" name="phone" autocomplete="tel" placeholder="+7 ..." required></div>
+      <div class="field"><label for="deliveryMethod">Получение заказа</label><select id="deliveryMethod" name="delivery"><option value="Уточнить у продавца">Уточнить у продавца</option><option value="Доставка">Доставка</option><option value="Самовывоз">Самовывоз</option></select></div>
+      <div class="field"><label for="customerComment">Комментарий</label><textarea id="customerComment" name="comment" rows="3" placeholder="Дата, город, адрес доставки или пожелания"></textarea></div>
+      <button class="btn" type="submit">Подготовить заявку <span>↗</span></button>
+      <p class="hint">Заявка не является подтверждением заказа. Продавец свяжется с вами для согласования условий.</p>
+      <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+</section>
+
+<section class="section"><div class="wrap"><div class="head"><div class="eyebrow">Почему удобно</div><h2>Покупателю важно понимать детали</h2><p>Никаких выдуманных обещаний — только то, что можно уточнить до заказа.</p></div>
+<div class="features">
+<article class="feature"><div class="feature-icon">◎</div><h3>Выбор под задачу</h3><p>Сориентируйтесь по формату и желаемому количеству.</p></article>
+<article class="feature"><div class="feature-icon">◇</div><h3>Цена до оплаты</h3><p>Узнайте итоговую стоимость выбранного объёма заранее.</p></article>
+<article class="feature"><div class="feature-icon">⌖</div><h3>Согласование получения</h3><p>Уточните доступные дату, время, доставку или самовывоз.</p></article>
+<article class="feature"><div class="feature-icon">✓</div><h3>Ответы на вопросы</h3><p>Запросите сведения о составе, приготовлении и хранении.</p></article>
+</div></div></section>
+<section class="section" id="order"><div class="wrap"><div class="head"><div class="eyebrow">Порядок заказа</div><h2>От выбора до стола — четыре шага</h2><p>Простой сценарий, в котором важные условия подтверждаются до оплаты.</p></div>
+<div class="steps"><article class="step"><span class="num">ШАГ 01</span><h3>Выберите формат</h3><p>Определитесь с категорией и примерным количеством.</p></article><article class="step"><span class="num">ШАГ 02</span><h3>Отправьте запрос</h3><p>Укажите, что именно хотите заказать и на какой случай.</p></article><article class="step"><span class="num">ШАГ 03</span><h3>Согласуйте детали</h3><p>Уточните наличие, стоимость, дату и способ получения.</p></article><article class="step"><span class="num">ШАГ 04</span><h3>Подтвердите заказ</h3><p>Оформите заказ на согласованных с продавцом условиях.</p></article></div>
+</div></section>
+<section class="section conditions"><div class="wrap"><div class="head"><div class="eyebrow">Условия</div><h2>Прозрачно и без сюрпризов</h2><p>Заполните фактическую информацию о продаже до запуска сайта.</p></div>
+<div class="condition-grid"><div class="condition"><b>Стоимость</b><span>[Цена за кг / упаковку / штуку]</span></div><div class="condition"><b>Наличие</b><span>[Актуальное наличие и сроки подготовки]</span></div><div class="condition"><b>Доставка</b><span>[Город, зона, стоимость или самовывоз]</span></div><div class="condition"><b>Оплата</b><span>[Способы и порядок оплаты]</span></div></div>
+</div></section>
+<section class="section" id="faq"><div class="wrap"><div class="head"><div class="eyebrow">Частые вопросы</div><h2>Что стоит узнать заранее</h2><p>Ответы помогут спокойно принять решение и оформить заказ.</p></div>
+<div class="faq">
+<details><summary>Какие раки есть в наличии?</summary><div class="answer">Ассортимент может меняться. Уточните у продавца актуальные категории, размеры и доступный объём.</div></details>
+<details><summary>Как понять, сколько заказать на компанию?</summary><div class="answer">Сообщите продавцу количество гостей и формат мероприятия. Он сможет сориентировать по доступному объёму.</div></details>
+<details><summary>Можно ли заказать к определённой дате?</summary><div class="answer">Уточните возможность заранее. Дата и время считаются согласованными только после подтверждения продавцом.</div></details>
+<details><summary>Как узнать состав и условия хранения?</summary><div class="answer">Запросите состав, дату приготовления, условия и допустимый срок хранения конкретной партии.</div></details>
+<details><summary>Сколько стоит доставка?</summary><div class="answer">Стоимость и географию доставки, а также возможность самовывоза уточните до подтверждения заказа.</div></details>
+</div></div></section>
+<section class="contact" id="contacts"><div class="wrap contact-inner"><div class="eyebrow">Ваш вкусный повод начинается здесь</div><h2>Выберите раков. Остальное обсудим.</h2><p>Оставьте запрос на выбранный вариант — продавец подтвердит наличие, стоимость и доступный способ получения.</p>
+<a class="btn" href="catalog.html">Выбрать вариант <span>↗</span></a>
+<div class="contact-detail">Телефон: [добавьте номер] · Город: [добавьте город] · Мессенджер: [добавьте ссылку]</div>
+</div></section>
+</main>
+<footer><div class="wrap foot"><span>© <span id="year"></span> Рачный двор. Информация о наличии и условиях уточняется у продавца.</span><a href="#top">Наверх ↑</a></div></footer>
+<div class="mobile-cta"><a class="btn" href="catalog.html">Выбрать раков</a></div>
+<script>
+const menu=document.querySelector('.menu'),links=document.querySelector('.links');
+menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');}));
+document.getElementById('year').textContent=new Date().getFullYear();
+// Контакты продавца заполните перед публикацией.
+const SHOP={whatsapp:'',email:''};
+let shopData=null;
+const cart=[];
+const cartItems=document.getElementById('cartItems');
+const cartCount=document.getElementById('cartCount');
+const cartStatus=document.getElementById('cartStatus');
+const money=value=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:2}).format(value);
+async function loadShopData(){try{const response=await fetch('data.json');if(response.ok)shopData=await response.json();}catch{shopData=null;}renderCart();}
+function renderCart(){
+ cartCount.textContent=String(cart.length);
+ cartStatus.textContent=cart.length?`Позиций: ${cart.length}`:'Пока ничего не добавлено';
+ if(!cart.length){cartItems.innerHTML='<p class="muted cart-empty">Каталог выше — выберите интересующие вас варианты.</p>';}
+ else{
+  cartItems.innerHTML='';
+  cart.forEach((item,index)=>{
+   const row=document.createElement('div');row.className='cart-row';
+   const info=document.createElement('div');
+   const title=document.createElement('b');title.textContent=item.name;
+   const details=document.createElement('small');details.textContent=`${item.option} · Количество: ${item.quantity}${item.unit?` ${item.unit}`:''}${item.price!==null?` · ${money(item.price)} / ${item.unit||'ед.'}`:' · цена уточняется'}`;
+   info.append(title,details);
+   const remove=document.createElement('button');remove.type='button';remove.className='cart-remove';remove.textContent='Убрать';remove.setAttribute('aria-label',`Убрать ${item.name}`);
+   remove.addEventListener('click',()=>{cart.splice(index,1);renderCart();});
+   row.append(info,remove);cartItems.append(row);
+  });
+ }
+ const priced=cart.length>0&&cart.every(item=>item.lineTotal!==null);
+ const itemsTotal=cart.reduce((sum,item)=>sum+(item.lineTotal||0),0);
+ const deliveryRaw=shopData?.delivery?.fee;
+ const deliveryFee=deliveryRaw!==''&&deliveryRaw!==null&&deliveryRaw!==undefined&&Number.isFinite(Number(deliveryRaw))?Number(deliveryRaw):null;
+ const method=document.getElementById('deliveryMethod')?.value||'Уточнить у продавца';
+ const deliveryApplicable=method==='Доставка';
+ document.getElementById('itemsTotal').textContent=priced?money(itemsTotal):'Уточняется';
+ document.getElementById('deliveryTotal').textContent=deliveryApplicable&&deliveryFee!==null?money(deliveryFee):(method==='Самовывоз'?'0 ₽':'Уточняется');
+ const canTotal=priced&&(!deliveryApplicable||deliveryFee!==null);
+ document.getElementById('grandTotal').textContent=canTotal?money(itemsTotal+(deliveryApplicable?deliveryFee:0)):'Уточняется';
+ document.getElementById('priceHint').textContent=canTotal?'Расчёт предварительный. Подтвердите наличие и итоговую сумму у продавца.':'Для расчёта заполните цены товаров в data.json и стоимость доставки, если она применяется.';
+}
+document.getElementById('deliveryMethod').addEventListener('change',renderCart);
+document.querySelectorAll('.add-to-cart').forEach(btn=>btn.addEventListener('click',()=>{
+ const card=btn.closest('.product');
+ const option=card.querySelector('select').value;
+ const quantityText=card.querySelector('input').value.trim()||'не указано';
+ const id=btn.dataset.name==='Классический выбор'?'classic':btn.dataset.name==='Большой стол'?'company':'custom';
+ const product=shopData?.products?.find(p=>p.id===id);
+ const numericQuantity=Number(quantityText.replace(',','.'));
+ const validQuantity=Number.isFinite(numericQuantity)&&numericQuantity>0;
+ const price=product&&product.price!==''&&product.price!==null&&Number.isFinite(Number(product.price))?Number(product.price):null;
+ const lineTotal=price!==null&&validQuantity?price*numericQuantity:null;
+ cart.push({id,name:product?.name||btn.dataset.name,option,quantity:quantityText,unit:product?.unit||'',price,lineTotal});
+ renderCart();
+ document.getElementById('cart').scrollIntoView({behavior:'smooth'});
+}));
+document.getElementById('clearCart').addEventListener('click',()=>{cart.length=0;renderCart();});
+document.getElementById('orderForm').addEventListener('submit',async event=>{
+ event.preventDefault();
+ const status=document.getElementById('formStatus');
+ if(!cart.length){status.textContent='Сначала добавьте хотя бы одну позицию из каталога.';return;}
+ const name=document.getElementById('customerName').value.trim()||'Не указано';
+ const contact=document.getElementById('customerPhone').value.trim();
+ const comment=document.getElementById('customerComment').value.trim()||'Нет';
+ const delivery=document.getElementById('deliveryMethod').value;
+ const items=cart.map(item=>({id:item.id,name:item.name,option:item.option,quantity:item.quantity,unit:item.unit}));
+ const message=`Заявка с сайта «Рачный двор»\nИмя: ${name}\nКонтакт: ${contact}\nПолучение: ${delivery}\n\n${items.map((x,i)=>`${i+1}. ${x.name}; ${x.option}; ${x.quantity} ${x.unit}`).join('\n')}\n\nКомментарий: ${comment}`;
+ const payload={name,contact,comment,delivery,items,website:document.getElementById('website').value};
+ status.textContent='Отправляем заявку…';
+ try{
+  const response=await fetch('/api/order',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+  const result=await response.json();
+  if(response.ok&&result.saved){
+   status.textContent=`Заявка сохранена. Номер: ${result.orderId}. Продавцу ещё нужно настроить уведомления о новых заказах.`;
+   cart.length=0;renderCart();event.target.reset();return;
+  }
+  if(response.ok&&!result.saved){
+   status.textContent='Форма проверена, но заявки пока не сохраняются: подключите ORDERS_KV в Cloudflare. Текст заявки скопирован.';
+  }else{
+   status.textContent=result.error||'Не удалось отправить заявку. Попробуйте ещё раз.';
+  }
+ }catch{
+  status.textContent='Серверный обработчик недоступен (например, сайт открыт локально без Pages Functions). Текст заявки скопирован для ручной отправки.';
+ }
+ try{await navigator.clipboard.writeText(message);}catch{}
+ if(SHOP.whatsapp){window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(message)}`,'_blank','noopener');}
+ else if(SHOP.email){location.href=`mailto:${SHOP.email}?subject=${encodeURIComponent('Заявка — Рачный двор')}&body=${encodeURIComponent(message)}`;}
+});
+loadShopData();
+</script>
+</body></html>

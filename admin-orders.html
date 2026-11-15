@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#11120f">
+<title>Заказы — Рачный двор</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{color-scheme:dark;--bg:#11120f;--panel:#1b1d19;--panel2:#23251f;--gold:#d8b66e;--text:#f7f3e9;--muted:#b9b8ad;--line:#383a31;--red:#d98778;--green:#9ac69b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{width:min(1120px,calc(100% - 32px));margin:auto}.top{padding:28px 0 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:900;letter-spacing:.12em}.brand span{display:block;color:var(--gold);font-size:.68rem;letter-spacing:.25em}
+h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.05em;margin:28px 0 6px}.muted{color:var(--muted)}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:22px 0}
+button,select{font:inherit;border:1px solid #756746;border-radius:12px;padding:11px 14px;background:var(--panel2);color:var(--text)}
+button{cursor:pointer}button.primary{background:linear-gradient(135deg,#f0d99d,var(--gold));color:#19180f;font-weight:800;border:0}
+button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+#message{min-height:24px;color:var(--gold);margin:10px 0}.orders{display:grid;gap:14px;margin:18px 0 50px}
+.order{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px}
+.order h2{font-size:1.1rem;margin:0 0 5px}.meta{font-size:.86rem;color:var(--muted);overflow-wrap:anywhere}
+.items{margin:13px 0 0;padding-left:19px;color:#e7e1d2}.comment{margin-top:10px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+.side{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;justify-content:flex-end}.status{min-width:145px}
+.empty{border:1px dashed var(--line);border-radius:18px;padding:28px;text-align:center;color:var(--muted)}
+@media(max-width:650px){.order{grid-template-columns:1fr}.side{justify-content:flex-start}.status{flex:1}.side button{flex:1}.toolbar button{flex:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">РАЧНЫЙ ДВОР<span>УПРАВЛЕНИЕ ЗАКАЗАМИ</span></div><a class="muted" href="index.html">← На сайт</a></header>
+<main>
+<h1>Заказы</h1><div class="muted">Список заявок из Cloudflare KV. Доступ должен быть закрыт Cloudflare Access.</div>
+<div class="toolbar">
+<button class="primary" id="refresh">Обновить список</button>
+<label class="muted" for="filter">Показать:</label>
+<select id="filter"><option value="">Все статусы</option><option>Новый</option><option>Принят</option><option>Готовится</option><option>Выполнен</option><option>Отменён</option></select>
+</div>
+<div id="message" role="status" aria-live="polite"></div>
+<section class="orders" id="orders"><div class="empty">Загрузка заказов…</div></section>
+</main>
+</div>
+<script>
+const root=document.querySelector('#orders'), message=document.querySelector('#message'), filter=document.querySelector('#filter');
+const statuses=['Новый','Принят','Готовится','Выполнен','Отменён'];
+let allOrders=[];
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const date=value=>{const d=new Date(value);return Number.isNaN(d.getTime())?'Дата не указана':d.toLocaleString('ru-RU')};
+async function load(){
+ message.textContent='Загружаю…'; root.innerHTML='<div class="empty">Загрузка заказов…</div>';
+ try{
+  const res=await fetch('/api/orders?limit=100',{credentials:'same-origin',cache:'no-store'});
+  const data=await res.json();
+  if(!res.ok||!data.ok) throw new Error(data.error||'Не удалось загрузить заказы.');
+  allOrders=data.orders||[]; render();
+  message.textContent=data.truncated?'Показаны последние 1000 найденных записей или меньше. Для полного архива нужна пагинация.':`Загружено заказов: ${allOrders.length}`;
+ }catch(err){root.innerHTML='<div class="empty">Нет доступа или сервер не настроен. Проверьте Cloudflare Access, ADMIN_EMAIL и привязку ORDERS_KV.</div>';message.textContent=err.message}
+}
+function render(){
+ const selected=filter.value, rows=allOrders.filter(o=>!selected||(o.status||'Новый')===selected);
+ if(!rows.length){root.innerHTML='<div class="empty">Заказов с таким статусом пока нет.</div>';return}
+ root.innerHTML=rows.map(o=>`<article class="order" data-id="${esc(o.id)}">
+ <div><h2>${esc(o.name||'Клиент без имени')}</h2><div class="meta">№ ${esc(o.id)} · ${esc(date(o.createdAt))}</div>
+ <div><b>Контакт:</b> ${esc(o.contact||'—')}</div><div><b>Получение:</b> ${esc(o.delivery||'Уточнить')}</div>
+ <ul class="items">${(o.items||[]).map(i=>`<li>${esc(i.name)} — ${esc(i.quantity)}${i.option?' · '+esc(i.option):''}</li>`).join('')}</ul>
+ ${o.comment?`<div class="comment"><b>Комментарий:</b> ${esc(o.comment)}</div>`:''}</div>
+ <div class="side"><select class="status" aria-label="Статус заказа">${statuses.map(s=>`<option ${s===(o.status||'Новый')?'selected':''}>${s}</option>`).join('')}</select><button class="save">Сохранить</button></div>
+ </article>`).join('');
+ root.querySelectorAll('.save').forEach(btn=>btn.addEventListener('click',async()=>{
+  const card=btn.closest('.order'), id=card.dataset.id, status=card.querySelector('.status').value;
+  btn.disabled=true;btn.textContent='…';
+  try{
+   const res=await fetch('/api/order-status',{method:'PATCH',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify({id,status})});
+   const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Ошибка обновления');
+   const order=allOrders.find(x=>x.id===id);if(order)order.status=status;
+   message.textContent=`Статус заказа обновлён: ${status}`;render();
+  }catch(err){message.textContent=err.message;btn.disabled=false;btn.textContent='Сохранить'}
+ }));
+}
+document.querySelector('#refresh').addEventListener('click',load);filter.addEventListener('change',render);load();
+</script>
+</body></html>

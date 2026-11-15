@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" role="img" aria-labelledby="title">
+<title id="title">Знак Рачный двор</title>
+<g fill="none" stroke="#d8b66e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M42 49 22 34 8 18M37 58 16 56 5 47M78 49 98 34 112 18M83 58l21-2 11-9"/>
+ <path d="M42 67 24 81M78 67l18 14"/>
+ <path d="M43 35c-9-13-4-25 8-28l9 16 9-16c12 3 17 15 8 28"/>
+</g>
+<path fill="#d93624" stroke="#f04b34" stroke-width="2" d="M60 29c-17 0-29 11-29 27 0 15 13 26 29 26s29-11 29-26C89 40 77 29 60 29Z"/>
+<path fill="#11120f" d="M45 48c4-4 9-4 13 0-4 5-9 5-13 0Zm17 0c4-4 9-4 13 0-4 5-9 5-13 0Z"/>
+<path fill="none" stroke="#d93624" stroke-width="6" stroke-linecap="round" d="M37 76 25 91M49 81 44 96M71 81l5 15M83 76l12 15"/>
+<path fill="none" stroke="#d93624" stroke-width="6" stroke-linecap="round" d="M33 38 17 27M87 38l16-11"/>
+</svg>
