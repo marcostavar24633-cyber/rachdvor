@@ -26,9 +26,9 @@ button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div class="brand">РАЧНЫЙ ДВОР<span>УПРАВЛЕНИЕ ЗАКАЗАМИ</span></div><a class="muted" href="index.html">← На сайт</a></header>
+<header class="top"><div class="brand">РАЧНЫЙ ДВОР<span>УПРАВЛЕНИЕ ЗАКАЗАМИ</span></div><div><a class="muted" href="index.html">← На сайт</a> <button id="logout">Выйти</button></div></header>
 <main>
-<h1>Заказы</h1><div class="muted">Список заявок из Cloudflare KV. Доступ должен быть закрыт Cloudflare Access.</div>
+<h1>Заказы</h1><div class="muted">Список заявок из Cloudflare KV. Доступ защищён паролем администратора.</div>
 <div class="toolbar">
 <button class="primary" id="refresh">Обновить список</button>
 <label class="muted" for="filter">Показать:</label>
@@ -75,6 +75,6 @@ function render(){
   }catch(err){message.textContent=err.message;btn.disabled=false;btn.textContent='Сохранить'}
  }));
 }
-document.querySelector('#refresh').addEventListener('click',load);filter.addEventListener('change',render);load();
+document.querySelector('#refresh').addEventListener('click',load);filter.addEventListener('change',render);document.querySelector('#logout').addEventListener('click',async()=>{await fetch('/api/admin-logout',{method:'POST',credentials:'same-origin'});location.href='/admin-login.html';});load();
 </script>
 </body></html>
