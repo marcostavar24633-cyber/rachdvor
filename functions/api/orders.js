@@ -1,7 +1,7 @@
 import { requireAdmin, adminJson } from "../_lib/admin-auth.js";
 
 export async function onRequestGet({ request, env }) {
-  const denied = requireAdmin(request, env);
+  const denied = await requireAdmin(request, env);
   if (denied) return denied;
 
   const url = new URL(request.url);
