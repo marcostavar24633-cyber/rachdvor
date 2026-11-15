@@ -2,6 +2,8 @@ name = "rachniy-dvor"
 compatibility_date = "2026-11-15"
 pages_build_output_dir = "."
 
-[[kv_namespaces]]
-binding = "ORDERS_KV"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+# Bind the KV namespace in Cloudflare Pages:
+# Settings -> Functions -> KV namespace bindings
+# Variable name: ORDERS_KV
+# Select the real KV namespace created for this project.
+# Do not put a placeholder namespace ID here.
