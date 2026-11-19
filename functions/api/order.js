@@ -1,5 +1,4 @@
 // Cloudflare Pages Function: POST /api/order
-// Optional binding: ORDERS_KV (KV namespace). If configured, stores validated order payloads.
 const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: {
@@ -9,10 +8,21 @@ const json = (body, status = 200) => new Response(JSON.stringify(body), {
   }
 });
 
+const MAX_BODY_BYTES = 16 * 1024;
+const MAX_ITEMS = 30;
+
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"]/g, ch => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"
   })[ch]);
+}
+
+async function loadCatalog(request, env) {
+  const stored = env.ORDERS_KV ? await env.ORDERS_KV.get("catalog:data") : null;
+  if (stored) return JSON.parse(stored);
+  const response = await fetch(new URL("/data.json", request.url));
+  if (!response.ok) throw new Error("Catalog unavailable");
+  return response.json();
 }
 
 async function notifyTelegram(order, env) {
@@ -48,15 +58,28 @@ async function notifyTelegram(order, env) {
 
 export async function onRequestPost({ request, env }) {
   const contentType = request.headers.get("content-type") || "";
-  if (!contentType.includes("application/json")) {
+  if (!contentType.toLowerCase().includes("application/json")) {
     return json({ ok: false, error: "Ожидается JSON." }, 415);
   }
+  const declaredLength = Number(request.headers.get("content-length") || 0);
+  if (declaredLength > MAX_BODY_BYTES) return json({ ok: false, error: "Заявка слишком большая." }, 413);
+
+  let raw;
+  try {
+    raw = await request.text();
+  } catch {
+    return json({ ok: false, error: "Не удалось прочитать запрос." }, 400);
+  }
+  if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return json({ ok: false, error: "Заявка слишком большая." }, 413);
 
   let data;
   try {
-    data = await request.json();
+    data = JSON.parse(raw);
   } catch {
     return json({ ok: false, error: "Некорректный формат запроса." }, 400);
+  }
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    return json({ ok: false, error: "Некорректные данные заявки." }, 400);
   }
 
   // Honeypot: bots often fill hidden fields. Return a generic success without storing.
@@ -68,18 +91,39 @@ export async function onRequestPost({ request, env }) {
   const contact = String(data.contact || "").trim().slice(0, 120);
   const comment = String(data.comment || "").trim().slice(0, 1000);
   const delivery = String(data.delivery || "Уточнить у продавца").trim().slice(0, 80);
-  const items = Array.isArray(data.items) ? data.items.slice(0, 30) : [];
-
   if (contact.length < 5) return json({ ok: false, error: "Укажите корректный контакт для связи." }, 400);
-  if (!items.length) return json({ ok: false, error: "Корзина пуста." }, 400);
+  if (!Array.isArray(data.items) || !data.items.length || data.items.length > MAX_ITEMS) {
+    return json({ ok: false, error: "Проверьте состав заказа (от 1 до 30 позиций)." }, 400);
+  }
 
+  let catalog;
+  try {
+    catalog = await loadCatalog(request, env);
+  } catch {
+    return json({ ok: false, error: "Не удалось проверить каталог. Попробуйте позже." }, 503);
+  }
+  const products = new Map((Array.isArray(catalog.products) ? catalog.products : []).map(product => [String(product.id), product]));
   const cleanItems = [];
-  for (const item of items) {
-    const title = String(item.name || "").trim().slice(0, 120);
+  for (const item of data.items) {
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      return json({ ok: false, error: "Некорректная позиция заказа." }, 400);
+    }
+    const id = String(item.id || "").trim();
+    const product = products.get(id);
     const quantity = String(item.quantity || "").trim().slice(0, 40);
     const option = String(item.option || "").trim().slice(0, 80);
-    if (!title || !quantity) return json({ ok: false, error: "Проверьте позиции заказа." }, 400);
-    cleanItems.push({ name: title, quantity, option });
+    if (!product || product.available === false) {
+      return json({ ok: false, error: "Одна из выбранных позиций больше недоступна. Обновите каталог." }, 400);
+    }
+    if (!quantity) return json({ ok: false, error: "Укажите количество для каждой позиции." }, 400);
+    // Product names and units are authoritative catalog values, never client-provided labels.
+    cleanItems.push({
+      id,
+      name: String(product.name || "Товар").slice(0, 120),
+      quantity,
+      unit: String(product.unit || "").slice(0, 30),
+      option
+    });
   }
 
   const order = {
@@ -94,24 +138,23 @@ export async function onRequestPost({ request, env }) {
     items: cleanItems
   };
 
-  if (env.ORDERS_KV) {
+  if (!env.ORDERS_KV) {
+    return json({ ok: false, saved: false, error: "Приём заявок временно не настроен." }, 503);
+  }
+
+  try {
     const ip = request.headers.get("CF-Connecting-IP") || "unknown";
     const bucket = new Date().toISOString().slice(0, 13);
-    const rateKey = `rate:${ip}:${bucket}`;
+    const rateKey = `rate:order:${ip}:${bucket}`;
     const count = Number(await env.ORDERS_KV.get(rateKey) || "0");
     if (count >= 8) return json({ ok: false, error: "Слишком много запросов. Попробуйте позже." }, 429);
     await env.ORDERS_KV.put(rateKey, String(count + 1), { expirationTtl: 7200 });
     await env.ORDERS_KV.put(`order:${order.id}`, JSON.stringify(order), { expirationTtl: 60 * 60 * 24 * 90 });
     const notificationSent = await notifyTelegram(order, env);
     return json({ ok: true, saved: true, orderId: order.id, notificationSent });
+  } catch {
+    return json({ ok: false, saved: false, error: "Не удалось сохранить заявку. Попробуйте позже." }, 500);
   }
-
-  // Without KV, accept only the validated request but do not claim it was stored.
-  return json({
-    ok: true,
-    saved: false,
-    message: "Запрос проверен, но хранилище заявок ещё не подключено."
-  }, 202);
 }
 
 export async function onRequest({ request }) {
