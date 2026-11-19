@@ -1,17 +1,22 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Вход администратора — Рачный двор</title><style>
-:root{color-scheme:dark;--bg:#11120f;--panel:#1b1d19;--gold:#d8b66e;--text:#f7f3e9;--muted:#b9b8ad;--line:#383a31}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 50% 0,#29271e,var(--bg) 55%);color:var(--text);font:16px/1.5 system-ui,sans-serif}.card{width:min(420px,100%);padding:30px;background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:0 20px 70px #0006}.brand{text-align:center;font-weight:900;letter-spacing:.14em}.brand small{display:block;color:var(--gold);font-size:.68rem;letter-spacing:.24em}h1{font-size:1.7rem;margin:28px 0 6px}p{color:var(--muted);margin:0 0 22px}label{display:block;margin:14px 0 7px;color:#ddd5c2;font-size:.9rem}input{width:100%;padding:14px;border:1px solid #555344;border-radius:12px;background:#10120e;color:var(--text);font:inherit}button{width:100%;margin-top:18px;padding:14px;border:0;border-radius:999px;background:linear-gradient(135deg,#f0d99d,var(--gold));color:#17170f;font:800 1rem system-ui;cursor:pointer}#message{min-height:24px;margin-top:14px;color:#e5bd73;font-size:.9rem}a{display:block;margin-top:18px;text-align:center;color:var(--muted)}
-/* Coastal Nocturne — MASTER PROMPT 3.0 */
-:root{--bg:#101916;--surface:#19231f;--surface2:#22302a;--gold:#d5a36c;--gold-light:#f1d4aa;--white:#f5f0e6;--text:#f5f0e6;--muted:#b8c0b6;--line:#35443b}
-body{background:var(--bg);color:var(--white);letter-spacing:.005em}
-header,.top{background:rgba(13,20,17,.9);border-color:#35443b;backdrop-filter:blur(14px)}
-.logo small,.eyebrow,.tag,.brand span{color:#e1b47e}
-.btn{border-radius:4px;background:linear-gradient(110deg,#f1d4aa,#c58b52);border:1px solid #e3b77f;color:#17170f;box-shadow:0 8px 28px #0002;transition:transform .25s,filter .25s,box-shadow .25s}
-.btn:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 14px 32px #0004}
-.btn.ghost{background:transparent;color:var(--white);border-color:#b88758}
-.occasion,.feature,.step,.product,.card,.cart-panel,.order-form,.form,.faq details{background:linear-gradient(145deg,#1b2822,#17211c);border-color:#35443b;border-radius:5px}
-.field input,.field select,.field textarea,.filters input,.filters select{background:#111a16;border-color:#46564b;border-radius:4px;color:var(--white)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+:root{color-scheme:dark;--bg:#101916;--panel:#19231f;--gold:#d5a36c;--gold-light:#f1d4aa;--text:#f5f0e6;--muted:#b8c0b6;--line:#35443b}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;display:grid;place-items:center;padding:22px;background:radial-gradient(ellipse at 50% 0,rgba(191,133,76,.2),transparent 42%),linear-gradient(145deg,#0b1410,#142019 58%,#101916);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.card{position:relative;isolation:isolate;width:min(440px,100%);padding:clamp(26px,6vw,42px);background:linear-gradient(145deg,rgba(27,40,34,.97),rgba(20,30,25,.98));border:1px solid var(--line);border-radius:5px;box-shadow:0 28px 90px rgba(0,0,0,.42)}
+.card:before{content:"";position:absolute;z-index:-1;inset:10px;border:1px solid rgba(213,163,108,.12);pointer-events:none}
+.brand{text-align:center;font-weight:950;letter-spacing:.14em;font-size:1.08rem}
+.brand small{display:block;color:#e1b47e;font-size:.65rem;letter-spacing:.27em;margin-top:8px}
+h1{font-size:clamp(1.7rem,5vw,2.1rem);letter-spacing:-.045em;margin:34px 0 7px}
+p{color:var(--muted);margin:0 0 24px}
+label{display:block;margin:16px 0 7px;color:#ded7c8;font-size:.88rem}
+input{width:100%;min-height:52px;padding:12px 14px;border:1px solid #46564b;border-radius:4px;background:#111a16;color:var(--text);font:inherit;transition:border-color .2s,box-shadow .2s}
+input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(213,163,108,.14)}
+button{width:100%;min-height:52px;margin-top:20px;padding:12px 18px;border:1px solid #e3b77f;border-radius:4px;background:linear-gradient(110deg,#f1d4aa,#c58b52);color:#17170f;font:850 1rem Inter,system-ui,sans-serif;cursor:pointer;transition:transform .25s,filter .25s}
+button:hover{transform:translateY(-2px);filter:brightness(1.06)}button:disabled{opacity:.65;cursor:wait;transform:none}
+#message{min-height:24px;margin-top:14px;color:#efc99a;font-size:.88rem}
+a{display:block;margin-top:20px;text-align:center;color:var(--muted);font-size:.88rem;text-underline-offset:4px}a:hover{color:var(--gold-light)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
 </style></head><body><main class="card"><div class="brand">РАЧНЫЙ ДВОР<small>ЗАКРЫТАЯ ПАНЕЛЬ</small></div><h1>Вход администратора</h1><p>Введите пароль, чтобы открыть управление магазином.</p><form id="loginForm"><label for="password">Пароль администратора</label><input id="password" type="password" autocomplete="current-password" required autofocus><button type="submit" id="submit">Войти</button></form><div id="message" role="status" aria-live="polite"></div><a href="/">Вернуться на сайт</a></main><script>
 const form=document.getElementById('loginForm'),message=document.getElementById('message'),button=document.getElementById('submit');const params=new URLSearchParams(location.search),requested=params.get('next'),next=requested==='/admin.html'||requested==='/admin-orders.html'?requested:'/admin-orders.html';
 form.addEventListener('submit',async e=>{e.preventDefault();button.disabled=true;button.textContent='Проверка…';message.textContent='';try{const r=await fetch('/api/admin-login',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify({password:document.getElementById('password').value})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Не удалось войти.');location.replace(next);}catch(err){message.textContent=err.message;button.disabled=false;button.textContent='Войти';}});
