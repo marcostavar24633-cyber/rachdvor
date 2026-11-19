@@ -1,6 +1,15 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join, extname } from "node:path";
 import { spawnSync } from "node:child_process";
+import assert from "node:assert/strict";
+import { isAllowedCatalogImage } from "../functions/api/catalog.js";
+
+assert.equal(isAllowedCatalogImage("assets/raki/hero.png"), true);
+assert.equal(isAllowedCatalogImage("https://cdn.example.com/image.jpg"), true);
+assert.equal(isAllowedCatalogImage(""), true);
+for (const unsafe of ["../secret.png", "assets/../secret.png", "assets/raki/../../secret.png", "/assets/raki/hero.png", "//evil.example/image.png", "javascript:alert(1)", "data:image/png;base64,AA=="]) {
+  assert.equal(isAllowedCatalogImage(unsafe), false, `Unsafe catalog image path accepted: ${unsafe}`);
+}
 
 const root = process.cwd();
 const errors = [];
