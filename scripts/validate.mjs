@@ -81,7 +81,12 @@ for (const file of files) {
 
   if (ext === ".json") {
     try {
-      JSON.parse(source);
+      const data = JSON.parse(source);
+      if (relative === "data.json" && Array.isArray(data.products)) {
+        for (const product of data.products) {
+          if (product.image) await verifyLocalReference(product.image, relative);
+        }
+      }
       checked.push(relative + " (JSON)");
     } catch (error) {
       errors.push(`${relative}: invalid JSON: ${error.message}`);
