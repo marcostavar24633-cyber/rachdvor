@@ -3,7 +3,7 @@ import { requireAdmin, adminJson } from "../_lib/admin-auth.js";
 const KEY = "catalog:data";
 const MAX_BYTES = 100 * 1024;
 
-export function isAllowedCatalogImage(value) {
+export function isCatalogProductRecord(item) {\n  return Boolean(item && typeof item === "object" && !Array.isArray(item));\n}\n\nexport function isAllowedCatalogImage(value) {
   const image = String(value || "").trim();
   if (!image) return true;
   if (/^https:\/\//i.test(image)) return true;
