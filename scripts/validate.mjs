@@ -1,5 +1,5 @@
-import { readdir, readFile } from "node:fs/promises";
-import { join, extname } from "node:path";
+import { access, readdir, readFile } from "node:fs/promises";
+import { dirname, join, extname, normalize, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 import assert from "node:assert/strict";
 import { isAllowedCatalogImage } from "../functions/api/catalog.js";
@@ -40,10 +40,20 @@ function checkJavaScript(source, label) {
 }
 
 const files = await walk(root);
+const fileSet = new Set(files.map(file => file.slice(root.length + 1)));
 for (const file of files) {
   const relative = file.slice(root.length + 1);
   const ext = extname(file).toLowerCase();
   const source = await readFile(file, "utf8");
+
+  if (ext === ".html") {
+    for (const match of source.matchAll(/\\b(?:src|href)\\s*=\\s*(["'])(.*?)\\1/gi)) {
+      await verifyLocalReference(match[2], relative);
+    }
+    for (const match of source.matchAll(/url\\(\\s*(["']?)(.*?)\\1\\s*\\)/gi)) {
+      await verifyLocalReference(match[2], relative);
+    }
+  }
 
   if (ext === ".json") {
     try {
