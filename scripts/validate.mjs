@@ -15,6 +15,31 @@ const root = process.cwd();
 const errors = [];
 const checked = [];
 
+async function verifyLocalReference(raw, label) {
+  const value = String(raw || "").trim();
+  if (!value || /^(?:https?:|mailto:|tel:|data:|javascript:|#|\/\/)/i.test(value)) return;
+  let pathname;
+  try {
+    pathname = decodeURIComponent(value.split(/[?#]/, 1)[0]);
+  } catch {
+    errors.push(label + ": invalid URL encoding in local reference: " + value);
+    return;
+  }
+  if (!pathname || pathname.startsWith("/api/")) return;
+  const target = pathname === "/" ? "index.html" :
+    normalize(pathname.startsWith("/") ? pathname.slice(1) : join(dirname(label), pathname));
+  if (target === ".." || target.startsWith(".." + sep)) {
+    errors.push(label + ": local reference escapes repository: " + value);
+    return;
+  }
+  try {
+    await access(join(root, target));
+  } catch {
+    errors.push(label + ": missing local reference: " + value);
+  }
+}
+
+
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
@@ -40,17 +65,16 @@ function checkJavaScript(source, label) {
 }
 
 const files = await walk(root);
-const fileSet = new Set(files.map(file => file.slice(root.length + 1)));
 for (const file of files) {
   const relative = file.slice(root.length + 1);
   const ext = extname(file).toLowerCase();
   const source = await readFile(file, "utf8");
 
   if (ext === ".html") {
-    for (const match of source.matchAll(/\\b(?:src|href)\\s*=\\s*(["'])(.*?)\\1/gi)) {
+    for (const match of source.matchAll(/\b(?:src|href)\s*=\s*(["'])(.*?)\1/gi)) {
       await verifyLocalReference(match[2], relative);
     }
-    for (const match of source.matchAll(/url\\(\\s*(["']?)(.*?)\\1\\s*\\)/gi)) {
+    for (const match of source.matchAll(/url\(\s*(["']?)(.*?)\1\s*\)/gi)) {
       await verifyLocalReference(match[2], relative);
     }
   }
