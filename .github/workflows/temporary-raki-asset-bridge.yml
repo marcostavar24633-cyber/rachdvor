@@ -1,0 +1,32 @@
+name: Temporary raki asset bridge
+on:
+  push:
+    branches:
+      - fix/catalog-product-fields
+permissions:
+  contents: read
+jobs:
+  export-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download original images from raki
+        run: |
+          mkdir -p payload
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%A0%D0%B0%D0%BA%D0%B8%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%B8%20%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D1%91%D0%BC%D0%BD%D0%BE%D0%B9%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5.png' -o "payload/hero.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%A0%D0%B0%D0%BA%D0%B8%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%B8%20%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%BE%D0%BC%20%D0%B2%20%D1%87%D1%83%D0%B3%D1%83%D0%BD%D0%BD%D0%BE%D0%B9%20%D1%81%D0%BA%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D0%B4%D0%B5-1.png' -o "payload/pan.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%93%D0%BE%D1%80%D0%B0%20%D1%81%D0%B2%D0%B5%D0%B6%D0%B8%D1%85%20%D1%80%D0%B0%D0%BA%D0%BE%D0%B2%20%D0%BD%D0%B0%20%D0%BC%D0%BE%D0%BA%D1%80%D0%BE%D0%BC%20%D0%BA%D0%B0%D0%BC%D0%BD%D0%B5-2.png' -o "payload/pile.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%9C%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D1%8A%D1%91%D0%BC%D0%BA%D0%B0%20%D1%80%D0%B5%D1%87%D0%BD%D0%BE%D0%B3%D0%BE%20%D1%80%D0%B0%D0%BA%D0%B0%20%D0%BD%D0%B0%20%D0%BC%D0%BE%D0%BA%D1%80%D0%BE%D0%BC%20%D0%BA%D0%B0%D0%BC%D0%BD%D0%B5-4.png' -o "payload/macro.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%A0%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D0%BA%D0%B5%D1%80%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D0%BC%D0%B5%D0%BB%D0%BA%D0%B8%D0%B9.png' -o "payload/small.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%90%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9.png' -o "payload/medium.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%90%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D0%BA%D1%80%D1%83%D0%BF%D0%BD%D1%8B%D0%B9.png' -o "payload/large.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%90%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D0%BE%D1%82%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B9.png' -o "payload/select.png"
+      - name: Encode for transfer
+        run: |
+          for f in payload/*.png; do base64 -w0 "$f" > "$f.b64"; done
+          rm payload/*.png
+      - name: Upload temporary transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: raki-assets-base64
+          path: payload/*.b64
+          retention-days: 1
