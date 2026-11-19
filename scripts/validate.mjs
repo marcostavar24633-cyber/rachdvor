@@ -74,8 +74,10 @@ for (const file of files) {
     for (const match of source.matchAll(/\b(?:src|href)\s*=\s*(["'])(.*?)\1/gi)) {
       await verifyLocalReference(match[2], relative);
     }
-    for (const match of source.matchAll(/url\(\s*(["']?)(.*?)\1\s*\)/gi)) {
-      await verifyLocalReference(match[2], relative);
+    for (const styleBlock of source.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style\s*>/gi)) {
+      for (const match of styleBlock[1].matchAll(/url\(\s*(["']?)(.*?)\1\s*\)/gi)) {
+        await verifyLocalReference(match[2], relative);
+      }
     }
   }
 
