@@ -64,8 +64,8 @@ async function load(){
   const data=await res.json();
   if(!res.ok||!data.ok) throw new Error(data.error||'Не удалось загрузить заказы.');
   allOrders=data.orders||[]; render();
-  message.textContent=data.truncated?'Показаны последние 1000 найденных записей или меньше. Для полного архива нужна пагинация.':`Загружено заказов: ${allOrders.length}`;
- }catch(err){root.innerHTML='<div class="empty">Нет доступа или сервер не настроен. Проверьте Cloudflare Access, ADMIN_EMAIL и привязку ORDERS_KV.</div>';message.textContent=err.message}
+  message.textContent=data.truncated?'Показаны последние 100 заказов из выборки KV. Если найдено 1000 записей или больше, архив требует отдельной пагинации.':`Загружено заказов: ${allOrders.length}`;
+ }catch(err){root.innerHTML='<div class="empty">Нет доступа или сервер не настроен. Проверьте вход по паролю администратора, секреты ADMIN_PASSWORD и SESSION_SECRET, а также привязку ORDERS_KV.</div>';message.textContent=err.message}
 }
 function render(){
  const selected=filter.value, rows=allOrders.filter(o=>!selected||(o.status||'Новый')===selected);
