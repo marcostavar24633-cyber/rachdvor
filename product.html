@@ -57,7 +57,7 @@ document.getElementById('productSize').textContent=item.size||'Уточняет�
 document.getElementById('productUnit').textContent=item.unit||'Уточняется у продавца';
 document.getElementById('productComposition').textContent=item.composition||'Уточняется у продавца';
 document.getElementById('productPrice').textContent=item.price!==''&&item.price!=null?String(item.price)+' ₽ / '+(item.unit||'ед.'):'Уточняется у продавца';
-document.getElementById('productAvailability').textContent=item.available===false?'Нет в наличии':'Наличие подтверждает продавец';const image=document.getElementById('productImage');image.src=item.image||'';image.alt='Фотография: '+item.name;document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('productAvailability').textContent=item.available===false?'Нет в наличии':'Наличие подтверждает продавец';const image=document.getElementById('productImage');image.src=item.image||'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%93%D0%BE%D1%80%D0%B0%20%D1%81%D0%B2%D0%B5%D0%B6%D0%B8%D1%85%20%D1%80%D0%B0%D0%BA%D0%BE%D0%B2%20%D0%BD%D0%B0%20%D0%BC%D0%BE%D0%BA%D1%80%D0%BE%D0%BC%20%D0%BA%D0%B0%D0%BC%D0%BD%D0%B5-2.png';image.alt='Фотография: '+item.name;document.getElementById('year').textContent=new Date().getFullYear();
 document.getElementById('request').addEventListener('submit',async e=>{
  e.preventDefault();const quantity=document.getElementById('quantity').value.trim()||'не указано';
  const contact=document.getElementById('contact').value.trim(),comment=document.getElementById('comment').value.trim()||'нет',status=document.getElementById('status');
