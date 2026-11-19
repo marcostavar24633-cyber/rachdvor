@@ -1,0 +1,35 @@
+name: Temporary raki image copy
+on:
+  push:
+    branches:
+      - fix/catalog-product-fields
+    paths:
+      - .github/workflows/temporary-raki-copy.yml
+permissions:
+  contents: write
+jobs:
+  copy-images:
+    if: contains(github.event.head_commit.message, 'Prepare temporary raki asset copy workflow')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Copy source images into this repository
+        run: |
+          mkdir -p assets/raki
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%A0%D0%B0%D0%BA%D0%B8%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%B8%20%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D1%91%D0%BC%D0%BD%D0%BE%D0%B9%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5.png' -o "assets/raki/hero.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%A0%D0%B0%D0%BA%D0%B8%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%B8%20%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%BE%D0%BC%20%D0%B2%20%D1%87%D1%83%D0%B3%D1%83%D0%BD%D0%BD%D0%BE%D0%B9%20%D1%81%D0%BA%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D0%B4%D0%B5-1.png' -o "assets/raki/pan.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%93%D0%BE%D1%80%D0%B0%20%D1%81%D0%B2%D0%B5%D0%B6%D0%B8%D1%85%20%D1%80%D0%B0%D0%BA%D0%BE%D0%B2%20%D0%BD%D0%B0%20%D0%BC%D0%BE%D0%BA%D1%80%D0%BE%D0%BC%20%D0%BA%D0%B0%D0%BC%D0%BD%D0%B5-2.png' -o "assets/raki/pile.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%9C%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D1%8A%D1%91%D0%BC%D0%BA%D0%B0%20%D1%80%D0%B5%D1%87%D0%BD%D0%BE%D0%B3%D0%BE%20%D1%80%D0%B0%D0%BA%D0%B0%20%D0%BD%D0%B0%20%D0%BC%D0%BE%D0%BA%D1%80%D0%BE%D0%BC%20%D0%BA%D0%B0%D0%BC%D0%BD%D0%B5-4.png' -o "assets/raki/macro.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%A0%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D0%BA%D0%B5%D1%80%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D0%BC%D0%B5%D0%BB%D0%BA%D0%B8%D0%B9.png' -o "assets/raki/small.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%90%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9.png' -o "assets/raki/medium.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%90%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D0%BA%D1%80%D1%83%D0%BF%D0%BD%D1%8B%D0%B9.png' -o "assets/raki/large.png"
+          curl -fL --retry 3 'https://raw.githubusercontent.com/marcostavar24633-cyber/raki/main/public/%D0%90%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B0%D0%BA%20%D1%81%20%D1%83%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BC%20%D0%BD%D0%B0%20%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B5%20%D0%BE%D1%82%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B9.png' -o "assets/raki/select.png"
+      - name: Commit images to the PR branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/raki/*.png
+          git commit -m "Copy original raki photos into project"
+          git push origin HEAD:fix/catalog-product-fields
