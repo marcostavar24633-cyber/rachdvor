@@ -1,20 +1,41 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Управление магазином — Рачный двор</title>
 <style>
-:root{--bg:#11120f;--panel:#1b1d19;--gold:#d8b66e;--text:#f7f3e9;--muted:#b9b8ad;--line:#383a31}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}.wrap{width:min(1100px,calc(100% - 32px));margin:auto}.top{padding:22px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.top b{letter-spacing:.1em}.top a{color:var(--gold)}h1{font-size:clamp(2rem,5vw,3rem);margin:30px 0 8px}.muted{color:var(--muted)}.notice{background:#28251b;border:1px solid #77633a;border-radius:14px;padding:16px;margin:20px 0;color:#e9d9b1}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin:16px 0}.panel h2{font-size:1.2rem;margin:0 0 15px}.field{display:grid;gap:5px;margin:11px 0}.field label{color:#d2cebf;font-size:.85rem}.field input,.field textarea,.field select{width:100%;border:1px solid #4a4b40;border-radius:10px;background:#10120e;color:var(--text);padding:11px;font:inherit}.field textarea{min-height:76px;resize:vertical}.btn{border:1px solid var(--gold);border-radius:999px;background:var(--gold);color:#17170f;font-weight:800;padding:11px 17px;cursor:pointer}.btn.secondary{background:transparent;color:var(--text);border-color:#68614c}.btn.danger{background:transparent;color:#ffb6a8;border-color:#a95b4b}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.products{display:grid;gap:10px}.product-tools{display:grid;grid-template-columns:1fr auto;gap:10px;margin:12px 0}.product-tools input{width:100%;border:1px solid #4a4b40;border-radius:10px;background:#10120e;color:var(--text);padding:11px;font:inherit}.item img{width:64px;height:64px;object-fit:cover;border-radius:10px;background:#292b24}.item-info{display:flex;align-items:center;gap:12px;min-width:0}.item-info>div{min-width:0;overflow-wrap:anywhere}.stats{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.stat{border:1px solid var(--line);border-radius:12px;padding:9px 12px;color:var(--muted)}.stat b{color:var(--gold)}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px}.item small{display:block;color:var(--muted)}.status{min-height:1.4em;color:var(--gold)}@media(max-width:760px){.layout{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
-
-/* Coastal Nocturne — MASTER PROMPT 3.0 */
-:root{--bg:#101916;--surface:#19231f;--surface2:#22302a;--gold:#d5a36c;--gold-light:#f1d4aa;--white:#f5f0e6;--text:#f5f0e6;--muted:#b8c0b6;--line:#35443b}
-body{background:var(--bg);color:var(--white);letter-spacing:.005em}
-header,.top{background:rgba(13,20,17,.9);border-color:#35443b;backdrop-filter:blur(14px)}
-.logo small,.eyebrow,.tag,.brand span{color:#e1b47e}
-.btn{border-radius:4px;background:linear-gradient(110deg,#f1d4aa,#c58b52);border:1px solid #e3b77f;color:#17170f;box-shadow:0 8px 28px #0002;transition:transform .25s,filter .25s,box-shadow .25s}
-.btn:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 14px 32px #0004}
-.btn.ghost{background:transparent;color:var(--white);border-color:#b88758}
-.occasion,.feature,.step,.product,.card,.cart-panel,.order-form,.form,.faq details{background:linear-gradient(145deg,#1b2822,#17211c);border-color:#35443b;border-radius:5px}
-.field input,.field select,.field textarea,.filters input,.filters select{background:#111a16;border-color:#46564b;border-radius:4px;color:var(--white)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+:root{--bg:#101916;--panel:#19231f;--panel2:#22302a;--gold:#d5a36c;--gold-light:#f1d4aa;--text:#f5f0e6;--muted:#b8c0b6;--line:#35443b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 85% 0,rgba(191,133,76,.1),transparent 34%),var(--bg);color:var(--text);font:15px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.005em}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+.top{position:sticky;top:0;z-index:15;padding:18px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px;background:rgba(13,20,17,.92);backdrop-filter:blur(14px)}
+.top b{letter-spacing:.12em;font-size:.9rem}.top a{color:var(--gold-light);text-underline-offset:4px}
+h1{font-size:clamp(2.5rem,6vw,4.8rem);line-height:.96;letter-spacing:-.075em;margin:44px 0 10px}
+.muted{color:var(--muted)}
+.notice{background:linear-gradient(110deg,rgba(213,163,108,.12),rgba(25,35,31,.9));border:1px solid rgba(184,135,88,.55);border-radius:4px;padding:17px 19px;margin:24px 0;color:#e6d8c2}
+.layout{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;align-items:start}
+.panel{min-width:0;background:linear-gradient(145deg,#1b2822,#17211c);border:1px solid var(--line);border-radius:5px;padding:clamp(18px,2.5vw,26px);margin:16px 0;box-shadow:0 14px 38px rgba(0,0,0,.13)}
+.panel h2{font-size:1.22rem;letter-spacing:-.025em;margin:0 0 16px}
+.field{display:grid;gap:6px;margin:14px 0}.field label{color:#d8d3c6;font-size:.84rem}
+.field input,.field textarea,.field select,.product-tools input{width:100%;min-height:46px;border:1px solid #46564b;border-radius:4px;background:#111a16;color:var(--text);padding:11px 12px;font:inherit;transition:border-color .2s,box-shadow .2s}
+.field textarea{min-height:88px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus,.product-tools input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(213,163,108,.12)}
+.btn{min-height:43px;border:1px solid #e3b77f;border-radius:4px;background:linear-gradient(110deg,#f1d4aa,#c58b52);color:#17170f;font-weight:850;padding:10px 16px;cursor:pointer;transition:transform .2s,filter .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 10px 25px rgba(0,0,0,.2)}
+.btn.secondary{background:transparent;color:var(--text);border-color:#8d6c4a}
+.btn.danger{background:transparent;color:#ffb6a8;border-color:#a95b4b}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.products{display:grid;gap:10px}
+.product-tools{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:10px;margin:14px 0}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:4px;background:rgba(13,21,17,.55)}
+.item img{width:66px;height:66px;object-fit:cover;border-radius:3px;background:#202b24}
+.item-info{display:flex;align-items:center;gap:12px;min-width:0}.item-info>div{min-width:0;overflow-wrap:anywhere}
+.item small{display:block;color:var(--muted)}
+.stats{display:flex;gap:9px;flex-wrap:wrap;margin:13px 0}
+.stat{border:1px solid var(--line);border-radius:4px;padding:9px 12px;color:var(--muted);background:#111a16}
+.stat b{color:var(--gold-light);font-variant-numeric:tabular-nums}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
+.status{min-height:1.4em;color:var(--gold-light)}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+@media(max-width:640px){.wrap{width:calc(100% - 30px)}.top{align-items:flex-start;flex-direction:column;padding:14px 0}.top .actions{margin:0}.top .actions a{align-self:center}.product-tools{grid-template-columns:1fr}.panel{padding:17px}.item{align-items:flex-start;flex-direction:column}.item-info{width:100%}.item .actions{width:100%}.item .actions .btn{flex:1}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
 </style></head><body><div class="wrap">
 <header class="top"><b>РАЧНЫЙ ДВОР · УПРАВЛЕНИЕ</b><div class="actions"><a href="index.html">← Открыть сайт</a><button class="btn secondary" id="logout" type="button">Выйти</button></div></header>
 <h1>Панель управления</h1><p class="muted">Редактирование каталога и условий магазина без ручного изменения HTML.</p>
