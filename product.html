@@ -19,6 +19,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 main{padding:clamp(35px,6vw,72px) 0 90px}.photo{border-radius:4px;border-color:#9b744e}.photo img{filter:saturate(.78)}
 .info h1{font-size:clamp(2.8rem,6vw,5.5rem);letter-spacing:-.075em}.facts{border-color:#35443b}.fact{border-color:#ffffff12}
+
+/* Coastal Nocturne refinement — product presentation only; request form and order logic untouched */
+header{position:sticky;top:0;z-index:12;background:rgba(13,20,17,.92);backdrop-filter:blur(14px);border-bottom:1px solid #35443b}
+.nav{height:78px;border-bottom:0}
+.brand{font-size:1.08rem;font-weight:950;letter-spacing:.1em}.brand span{color:#e1b47e}
+.nav a:last-child{color:#f1d4aa;font-size:.9rem;transition:color .2s}.nav a:last-child:hover{color:#fff}
+main{padding:clamp(38px,6vw,76px) 0 90px}
+.crumb{font-size:.82rem;letter-spacing:.025em;color:#b8c0b6;margin-bottom:28px}
+.crumb a{color:#e1b47e;text-underline-offset:4px}.crumb a:hover{color:#f1d4aa}
+.photo{position:relative;border-radius:5px;border:1px solid #9b744e;background:#17211c;box-shadow:0 18px 48px rgba(0,0,0,.2)}
+.photo img{filter:saturate(.78) contrast(1.06);transition:transform .8s}
+.photo:hover img{transform:scale(1.025)}
+.tag{color:#e1b47e;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+.info h1{font-size:clamp(3rem,6vw,5.8rem);line-height:.92;letter-spacing:-.08em;text-wrap:balance;margin:14px 0 20px}
+.info>p{max-width:620px;color:#c6cfc5;line-height:1.75}
+.facts{border-block-color:#35443b;margin:26px 0}
+.fact{border-bottom-color:rgba(255,255,255,.09);padding:14px 0}
+.fact b{font-weight:700;color:#e8e1d3}.fact span{color:#b8c0b6;text-align:right}
+footer{background:#0d1511;border-top:1px solid #35443b;padding:25px 0;color:#b8c0b6}
+footer a{color:#f1d4aa;text-underline-offset:4px}
+@media(max-width:760px){.nav{height:68px}.product{gap:26px}.photo img{height:clamp(260px,72vw,390px)}.info h1{font-size:clamp(2.9rem,13vw,4.8rem)}main{padding-top:32px}}
+@media(prefers-reduced-motion:reduce){.photo img{transition:none}}
 </style></head><body><header><div class="wrap nav"><a class="brand" href="index.html">РАЧНЫЙ <span>ДВОР</span></a><a href="catalog.html">← В каталог</a></div></header>
 <main class="wrap"><div class="crumb"><a href="index.html">Главная</a> / <a href="catalog.html">Каталог</a> / <span id="crumbName">Товар</span></div>
 <div class="product"><div class="photo"><img id="productImage" src="" alt="" fetchpriority="high"></div><section class="info"><div class="tag" id="productTag"></div><h1 id="productName">Загрузка…</h1><p id="productDescription"></p>
