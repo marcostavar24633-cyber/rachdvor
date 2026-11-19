@@ -206,7 +206,7 @@ function renderHomeCatalog(){
   const select=document.createElement('select');select.setAttribute('aria-label','Размер или категория: '+product.name);
   const option=document.createElement('option');option.value='Уточнить доступные варианты';option.textContent='Уточнить доступные варианты';select.append(option);label.append(select);field.append(label);
   const qf=document.createElement('div');qf.className='field';const ql=document.createElement('label');ql.textContent='Количество или вес';
-  const quantity=document.createElement('input');quantity.placeholder='Например, 1 кг';quantity.setAttribute('aria-label','Количество или вес: '+product.name);qf.append(ql,quantity);
+  const quantity=document.createElement('input');quantity.placeholder='Например, 1 кг';quantity.setAttribute('aria-label','Количество или вес: '+product.name);ql.append(quantity);qf.append(ql);
   const button=document.createElement('button');button.type='button';button.className='btn add-to-cart';button.dataset.productId=product.id;button.textContent='Добавить в заявку';
   body.append(tag,details,title,desc,field,qf,button);card.append(link,body);host.append(card);
  });
@@ -244,7 +244,7 @@ function renderCart(){
  document.getElementById('deliveryTotal').textContent=deliveryApplicable&&deliveryFee!==null?money(deliveryFee):(method==='Самовывоз'?'0 ₽':'Уточняется');
  const canTotal=priced&&(!deliveryApplicable||deliveryFee!==null);
  document.getElementById('grandTotal').textContent=canTotal?money(itemsTotal+(deliveryApplicable?deliveryFee:0)):'Уточняется';
- document.getElementById('priceHint').textContent=canTotal?'Расчёт предварительный. Подтвердите наличие и итоговую сумму у продавца.':'Для расчёта заполните цены товаров в data.json и стоимость доставки, если она применяется.';
+ document.getElementById('priceHint').textContent=canTotal?'Расчёт предварительный. Подтвердите наличие и итоговую сумму у продавца.':'Для расчёта заполните цены товаров и стоимость доставки в каталоге, если она применяется.';
 }
 document.getElementById('deliveryMethod').addEventListener('change',renderCart);
 document.getElementById('homeCatalog').addEventListener('click',event=>{
