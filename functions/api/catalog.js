@@ -38,7 +38,7 @@ export async function onRequestPut({ request, env }) {
       id, name,
       category: String(item.category || "").slice(0, 80),
       tag: String(item.tag || "").slice(0, 80),
-       description: String(item.description || "").slice(0, 1500),
+      description: String(item.description || "").slice(0, 1500),
       size: String(item.size || "").slice(0, 120),
       composition: String(item.composition || "").slice(0, 500),
       price, unit: String(item.unit || "").slice(0, 30),
