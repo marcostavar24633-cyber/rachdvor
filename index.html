@@ -270,6 +270,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .hero-photo img,.hero h1,.hero-copy,.hero .actions,.hero .micro{animation:none!important;filter:none!important}
 }
 
+/* Master Prompt 3.1 — real scroll-linked camera parallax, independent of the slow Ken Burns drift */
+.hero-photo img{translate:0 var(--hero-parallax-y,0px)}
+@media(prefers-reduced-motion:reduce){.hero-photo img{translate:none!important}}
+
 </style>
 </head>
 <body>
@@ -296,7 +300,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <article class="occasion"><span class="num">03 / ПРАЗДНИК</span><h3>Для большого стола</h3><p>Заранее обсудите нужное количество, дату и возможность подготовить заказ.</p></article>
 </div></div></section>
 <section class="section story" id="story"><div class="wrap story-grid">
-<div class="story-photo"><img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=1100&q=80" alt="Подача блюда из морепродуктов" loading="lazy"></div>
+<div class="story-photo"><img src="assets/raki/macro.png" alt="Крупный план раков из фотоматериалов проекта" loading="lazy" decoding="async"></div>
 <div><div class="eyebrow">Философия Рачного двора</div><h2>Не просто покупка. Повод собраться за одним столом.</h2><p class="muted">Мы делаем выбор понятным: вы рассказываете, для какого случая нужны раки, а перед заказом уточняете доступные варианты и все важные детали.</p>
 <div class="story-list"><div><span class="tick">✓</span><span>Подберите категорию и ориентировочный объём.</span></div><div><span class="tick">✓</span><span>Уточните состав, способ приготовления и упаковку.</span></div><div><span class="tick">✓</span><span>Согласуйте итоговую стоимость и способ получения.</span></div></div>
 <a class="btn" href="catalog.html">Посмотреть варианты</a></div>
@@ -475,6 +479,27 @@ document.getElementById('orderForm').addEventListener('submit',async event=>{
  if(SHOP.whatsapp){window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(message)}`,'_blank','noopener');}
  else if(SHOP.email){location.href=`mailto:${SHOP.email}?subject=${encodeURIComponent('Заявка — Рачный двор')}&body=${encodeURIComponent(message)}`;}
 });
+
+/* Scroll-linked parallax: subtle on phones, stronger on wide screens, disabled for reduced motion. */
+(()=>{
+ const hero=document.querySelector('.hero'),image=hero?.querySelector('.hero-photo img');
+ if(!hero||!image||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ let frame=0;
+ const update=()=>{
+  frame=0;
+  const rect=hero.getBoundingClientRect();
+  if(rect.bottom<0||rect.top>innerHeight)return;
+  const progress=(innerHeight-rect.top)/(innerHeight+rect.height);
+  const intensity=matchMedia('(max-width: 640px)').matches?14:30;
+  const offset=Math.max(-intensity,Math.min(intensity,(progress-.5)*intensity*2));
+  image.style.setProperty('--hero-parallax-y',offset.toFixed(1)+'px');
+ };
+ const schedule=()=>{if(!frame)frame=requestAnimationFrame(update)};
+ addEventListener('scroll',schedule,{passive:true});
+ addEventListener('resize',schedule,{passive:true});
+ schedule();
+})();
+
 loadShopData();
 </script>
 </body></html>
