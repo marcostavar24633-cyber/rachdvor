@@ -15,13 +15,57 @@ export async function onRequestGet({ request, env }) {
   }
 }
 
+async function readBoundedJson(request) {
+  const contentType = request.headers.get("content-type") || "";
+  if (!/^application\\/json(?:\\s*;|$)/i.test(contentType)) {
+    return { error: adminJson({ ok: false, error: "Ожидается Content-Type: application/json." }, 415) };
+  }
+
+  const declaredLength = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_BYTES) {
+    return { error: adminJson({ ok: false, error: "Файл каталога слишком большой (максимум 100 КБ)." }, 413) };
+  }
+
+  if (!request.body) return { error: adminJson({ ok: false, error: "Пустое тело запроса." }, 400) };
+
+  const reader = request.body.getReader();
+  const chunks = [];
+  let total = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > MAX_BYTES) {
+        await reader.cancel();
+        return { error: adminJson({ ok: false, error: "Файл каталога слишком большой (максимум 100 КБ)." }, 413) };
+      }
+      chunks.push(value);
+    }
+  } catch {
+    return { error: adminJson({ ok: false, error: "Не удалось прочитать тело запроса." }, 400) };
+  }
+
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+
+  try {
+    return { data: JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)) };
+  } catch {
+    return { error: adminJson({ ok: false, error: "Некорректный JSON." }, 400) };
+  }
+}
+
 export async function onRequestPut({ request, env }) {
   const denied = await requireAdmin(request, env);
   if (denied) return denied;
-  const raw = await request.text();
-  if (new TextEncoder().encode(raw).length > MAX_BYTES) return adminJson({ ok: false, error: "Файл каталога слишком большой (максимум 100 КБ)." }, 413);
-  let data;
-  try { data = JSON.parse(raw); } catch { return adminJson({ ok: false, error: "Некорректный JSON." }, 400); }
+  const parsed = await readBoundedJson(request);
+  if (parsed.error) return parsed.error;
+  const data = parsed.data;
   if (!data || !Array.isArray(data.products) || data.products.length > 200) return adminJson({ ok: false, error: "Каталог должен содержать массив products (не более 200 товаров)." }, 400);
   const ids = new Set();
   const products = [];
