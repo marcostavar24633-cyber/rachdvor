@@ -2,11 +2,11 @@ import { access, readdir, readFile } from "node:fs/promises";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 import assert from "node:assert/strict";
-import { isAllowedCatalogImage } from "../functions/api/catalog.js";
+import { isAllowedCatalogImage, isCatalogProductRecord } from "../functions/api/catalog.js";
 
 assert.equal(isAllowedCatalogImage("assets/raki/hero.png"), true);
 assert.equal(isAllowedCatalogImage("https://cdn.example.com/image.jpg"), true);
-assert.equal(isAllowedCatalogImage(""), true);
+assert.equal(isAllowedCatalogImage(""), true);\nassert.equal(isCatalogProductRecord({ id: "sample", name: "Товар" }), true);\nassert.equal(isCatalogProductRecord(null), false);\nassert.equal(isCatalogProductRecord(undefined), false);\nassert.equal(isCatalogProductRecord("товар"), false);\nassert.equal(isCatalogProductRecord([]), false);
 for (const unsafe of ["../secret.png", "assets/../secret.png", "assets/raki/../../secret.png", "/assets/raki/hero.png", "//evil.example/image.png", "javascript:alert(1)", "data:image/png;base64,AA=="]) {
   assert.equal(isAllowedCatalogImage(unsafe), false, `Unsafe catalog image path accepted: ${unsafe}`);
 }
