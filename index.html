@@ -227,7 +227,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 }
 @media(max-width:640px){
   .hero{min-height:calc(100svh - 68px)}
-  .hero-grid{
+  /* Let the full-bleed photo anchor to .hero, not the narrow text container. */
+  .hero-grid{position:static;
+
     width:calc(100% - 34px);
     min-height:calc(100svh - 68px);
     padding:clamp(58px,10vh,90px) 0 clamp(66px,11vh,100px);
