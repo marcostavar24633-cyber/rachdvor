@@ -17,7 +17,7 @@ export async function onRequestGet({ request, env }) {
 
 async function readBoundedJson(request) {
   const contentType = request.headers.get("content-type") || "";
-  if (!/^application\\/json(?:\\s*;|$)/i.test(contentType)) {
+  if (!/^application\/json(?:\s*;|$)/i.test(contentType)) {
     return { error: adminJson({ ok: false, error: "Ожидается Content-Type: application/json." }, 415) };
   }
 
