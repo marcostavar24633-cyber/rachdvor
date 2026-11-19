@@ -35,6 +35,8 @@ header,.top{background:rgba(13,20,17,.9);border-color:#35443b;backdrop-filter:bl
 .field input,.field select,.field textarea,.filters input,.filters select{background:#111a16;border-color:#46564b;border-radius:4px;color:var(--white)}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+ .pagination{display:flex;justify-content:center;margin:22px 0 50px}button:disabled{opacity:.55;cursor:wait}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -49,31 +51,42 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 <div id="message" role="status" aria-live="polite"></div>
 <section class="orders" id="orders"><div class="empty">Загрузка заказов…</div></section>
+<div class="pagination"><button class="primary" id="loadMore" hidden>Загрузить ещё</button></div>
 </main>
 </div>
 <script>
-const root=document.querySelector('#orders'), message=document.querySelector('#message'), filter=document.querySelector('#filter');
+const root=document.querySelector('#orders'), message=document.querySelector('#message'), filter=document.querySelector('#filter'), loadMoreButton=document.querySelector('#loadMore');
 const statuses=['Новый','Принят','Готовится','Выполнен','Отменён'];
-let allOrders=[];
+let allOrders=[], nextCursor=null, loading=false;
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const date=value=>{const d=new Date(value);return Number.isNaN(d.getTime())?'Дата не указана':d.toLocaleString('ru-RU')};
-async function load(){
- message.textContent='Загружаю…'; root.innerHTML='<div class="empty">Загрузка заказов…</div>';
+async function load(reset=true){
+ if(loading)return;
+ if(reset){allOrders=[];nextCursor=null;root.innerHTML='<div class="empty">Загрузка заказов…</div>';}
+ loading=true;loadMoreButton.disabled=true;loadMoreButton.hidden=true;message.textContent=reset?'Загружаю заказы…':'Загружаю следующую страницу…';
  try{
-  const res=await fetch('/api/orders?limit=100',{credentials:'same-origin',cache:'no-store'});
-  const data=await res.json();
-  if(!res.ok||!data.ok) throw new Error(data.error||'Не удалось загрузить заказы.');
-  allOrders=data.orders||[]; render();
-  message.textContent=data.truncated?'Показаны последние 100 заказов из выборки KV. Если найдено 1000 записей или больше, архив требует отдельной пагинации.':`Загружено заказов: ${allOrders.length}`;
- }catch(err){root.innerHTML='<div class="empty">Нет доступа или сервер не настроен. Проверьте вход по паролю администратора, секреты ADMIN_PASSWORD и SESSION_SECRET, а также привязку ORDERS_KV.</div>';message.textContent=err.message}
+  const params=new URLSearchParams({limit:'100'});if(nextCursor)params.set('cursor',nextCursor);
+  const res=await fetch('/api/orders?'+params.toString(),{credentials:'same-origin',cache:'no-store'});
+  const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Не удалось загрузить заказы.');
+  const known=new Set(allOrders.map(o=>o.id));
+  for(const order of (data.orders||[]))if(!known.has(order.id)){allOrders.push(order);known.add(order.id);}
+  nextCursor=data.nextCursor||null;
+  allOrders.sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
+  render();
+  message.textContent=nextCursor?'Загружено: '+allOrders.length+' заказов. Есть ещё страницы.':'Загружено заказов: '+allOrders.length+'. Архив просмотрен полностью.';
+  loadMoreButton.hidden=!nextCursor;
+ }catch(err){
+  if(!allOrders.length)root.innerHTML='<div class="empty">Нет доступа или сервер не настроен. Проверьте вход администратора и привязку ORDERS_KV.</div>';
+  message.textContent=err.message;loadMoreButton.hidden=!nextCursor;
+ }finally{loading=false;loadMoreButton.disabled=false;}
 }
 function render(){
  const selected=filter.value, rows=allOrders.filter(o=>!selected||(o.status||'Новый')===selected);
- if(!rows.length){root.innerHTML='<div class="empty">Заказов с таким статусом пока нет.</div>';return}
+ if(!rows.length){root.innerHTML='<div class="empty">Заказов с таким статусом среди загруженных страниц нет.</div>';return}
  root.innerHTML=rows.map(o=>`<article class="order" data-id="${esc(o.id)}">
  <div><h2>${esc(o.name||'Клиент без имени')}</h2><div class="meta">№ ${esc(o.id)} · ${esc(date(o.createdAt))}</div>
  <div><b>Контакт:</b> ${esc(o.contact||'—')}</div><div><b>Получение:</b> ${esc(o.delivery||'Уточнить')}</div>
- <ul class="items">${(o.items||[]).map(i=>`<li>${esc(i.name)} — ${esc(i.quantity)}${i.option?' · '+esc(i.option):''}</li>`).join('')}</ul>
+ <ul class="items">${(o.items||[]).map(i=>`<li>${esc(i.name)} — ${esc(i.quantity)}${i.unit?' '+esc(i.unit):''}${i.option?' · '+esc(i.option):''}</li>`).join('')}</ul>
  ${o.comment?`<div class="comment"><b>Комментарий:</b> ${esc(o.comment)}</div>`:''}</div>
  <div class="side"><select class="status" aria-label="Статус заказа">${statuses.map(s=>`<option ${s===(o.status||'Новый')?'selected':''}>${s}</option>`).join('')}</select><button class="save">Сохранить</button></div>
  </article>`).join('');
@@ -84,10 +97,14 @@ function render(){
    const res=await fetch('/api/order-status',{method:'PATCH',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify({id,status})});
    const data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'Ошибка обновления');
    const order=allOrders.find(x=>x.id===id);if(order)order.status=status;
-   message.textContent=`Статус заказа обновлён: ${status}`;render();
+   message.textContent='Статус заказа обновлён: '+status;render();
   }catch(err){message.textContent=err.message;btn.disabled=false;btn.textContent='Сохранить'}
  }));
 }
-document.querySelector('#refresh').addEventListener('click',load);filter.addEventListener('change',render);document.querySelector('#logout').addEventListener('click',async()=>{await fetch('/api/admin-logout',{method:'POST',credentials:'same-origin'});location.href='/admin-login.html';});load();
+document.querySelector('#refresh').addEventListener('click',()=>load(true));
+loadMoreButton.addEventListener('click',()=>load(false));
+filter.addEventListener('change',render);
+document.querySelector('#logout').addEventListener('click',async()=>{await fetch('/api/admin-logout',{method:'POST',credentials:'same-origin'});location.href='/admin-login.html';});
+load(true);
 </script>
 </body></html>
