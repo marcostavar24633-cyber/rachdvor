@@ -5,35 +5,54 @@
 <meta name="description" content="Каталог варёных раков «Рачный двор». Выберите формат заказа и уточните наличие, вес и стоимость.">
 <title>Каталог варёных раков — Рачный двор</title><link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
-:root{--bg:#11120f;--surface:#1b1d19;--gold:#d8b66e;--gold2:#f0d99d;--text:#f7f3e9;--muted:#b9b8ad;--line:#383a31;--max:1120px}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,sans-serif}a{color:inherit;text-decoration:none}button,input,select{font:inherit}.wrap{width:min(var(--max),calc(100% - 36px));margin:auto}.top{border-bottom:1px solid var(--line);background:#11120fee}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:900;letter-spacing:.1em}.brand span{color:var(--gold)}.nav a:last-child{color:var(--gold2)}.hero{padding:55px 0 30px}.eyebrow{color:var(--gold);font-size:.75rem;letter-spacing:.18em;font-weight:800;text-transform:uppercase}.hero h1{font-size:clamp(2.4rem,6vw,4.5rem);line-height:1;letter-spacing:-.06em;margin:12px 0}.hero p{color:var(--muted);max-width:650px}.filters{display:grid;grid-template-columns:1fr 220px;gap:12px;margin:24px 0 30px}.filters input,.filters select{width:100%;min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--text)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:70px}.card{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--surface)}.card img{height:220px;width:100%;object-fit:cover}.body{padding:20px}.tag{font-size:.72rem;color:var(--gold2);letter-spacing:.08em;font-weight:800}.body h2{font-size:1.25rem;margin:8px 0}.body p{color:var(--muted);font-size:.91rem;min-height:66px}.meta{font-size:.82rem;color:#d8d4c8;margin:12px 0}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#17170f;font-weight:850;border:1px solid var(--gold);cursor:pointer}.btn.ghost{background:transparent;color:var(--text);border-color:#716344}.empty{display:none;padding:35px;border:1px dashed var(--line);border-radius:18px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:.84rem}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.card img{height:230px}}
-
-/* Coastal Nocturne — MASTER PROMPT 3.0 */
-:root{--bg:#101916;--surface:#19231f;--surface2:#22302a;--gold:#d5a36c;--gold-light:#f1d4aa;--white:#f5f0e6;--text:#f5f0e6;--muted:#b8c0b6;--line:#35443b}
-body{background:var(--bg);color:var(--white);letter-spacing:.005em}
-header,.top{background:rgba(13,20,17,.9);border-color:#35443b;backdrop-filter:blur(14px)}
-.logo small,.eyebrow,.tag,.brand span{color:#e1b47e}
-.btn{border-radius:4px;background:linear-gradient(110deg,#f1d4aa,#c58b52);border:1px solid #e3b77f;color:#17170f;box-shadow:0 8px 28px #0002;transition:transform .25s,filter .25s,box-shadow .25s}
-.btn:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 14px 32px #0004}
+:root{--bg:#101916;--surface:#19231f;--surface2:#22302a;--gold:#d5a36c;--gold-light:#f1d4aa;--white:#f5f0e6;--text:#f5f0e6;--muted:#b8c0b6;--line:#35443b;--max:1160px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--white);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.005em}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}
+.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+.top{position:sticky;top:0;z-index:20;background:rgba(13,20,17,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-size:1.08rem;font-weight:950;letter-spacing:.1em}.brand span{color:#e1b47e}
+.nav a:last-child{color:var(--gold-light);font-size:.9rem;transition:color .2s}.nav a:last-child:hover{color:#fff}
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:340px;padding:clamp(68px,9vw,116px) 0 42px;background:radial-gradient(ellipse at 82% 35%,rgba(191,133,76,.2),transparent 34%),radial-gradient(ellipse at 65% 100%,rgba(68,104,78,.2),transparent 48%),linear-gradient(115deg,#0b1410 0%,#142019 55%,#17231c 100%);border-bottom:1px solid rgba(213,163,108,.18)}
+.hero:after{content:"";position:absolute;z-index:-1;right:-190px;top:-330px;width:650px;height:650px;border:1px solid rgba(224,173,119,.2);border-radius:50%;box-shadow:0 0 110px rgba(183,123,68,.08),inset 0 0 90px rgba(183,123,68,.04)}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;color:#e1b47e;font-size:.72rem;font-weight:850;letter-spacing:.2em;text-transform:uppercase}
+.eyebrow:before{content:"";width:32px;height:1px;background:linear-gradient(90deg,#e9bd8e,transparent)}
+.hero h1{max-width:850px;font-size:clamp(3.4rem,8vw,7rem);line-height:.92;letter-spacing:-.08em;margin:18px 0 22px;text-wrap:balance}
+.hero p{max-width:650px;margin:0;color:rgba(245,240,230,.78);font-size:1.04rem;line-height:1.75}
+.filters{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:12px;margin:30px 0 34px}
+.filters input,.filters select{width:100%;min-height:54px;padding:12px 16px;border:1px solid #46564b;border-radius:4px;background:rgba(17,26,22,.92);color:var(--white);box-shadow:0 8px 26px rgba(0,0,0,.12);transition:border-color .2s,background .2s,box-shadow .2s}
+.filters input::placeholder{color:#929d93}.filters input:focus,.filters select:focus{outline:none;border-color:var(--gold);background:#142019;box-shadow:0 0 0 3px rgba(213,163,108,.13)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:12px 0 88px}
+.card{min-width:0;overflow:hidden;position:relative;border:1px solid var(--line);border-radius:5px;background:linear-gradient(145deg,#1b2822,#17211c);box-shadow:0 14px 38px rgba(0,0,0,.14);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);border-color:#b88758;box-shadow:0 22px 48px rgba(0,0,0,.28)}
+.card img{display:block;width:100%;height:245px;object-fit:cover;background:#202b24;filter:saturate(.78) contrast(1.04);transition:transform .7s,filter .5s}
+.card:hover img{transform:scale(1.035);filter:saturate(.9) contrast(1.06)}
+.body{padding:24px}.tag{display:inline-block;color:#efc99a;font-size:.69rem;font-weight:850;letter-spacing:.15em;text-transform:uppercase}
+.body h2{margin:11px 0 9px;font-size:1.38rem;line-height:1.15;letter-spacing:-.035em}
+.body p{min-height:72px;margin:0;color:var(--muted);font-size:.92rem;line-height:1.65}
+.meta{margin:17px 0 18px;padding-top:14px;border-top:1px solid rgba(213,163,108,.18);color:#e1d4bf;font-size:.84rem}
+.actions{display:flex;gap:9px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border:1px solid #e3b77f;border-radius:4px;background:linear-gradient(110deg,#f1d4aa,#c58b52);color:#17170f;font-weight:850;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.13);transition:transform .25s,filter .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 14px 32px rgba(0,0,0,.25)}
 .btn.ghost{background:transparent;color:var(--white);border-color:#b88758}
-.occasion,.feature,.step,.product,.card,.cart-panel,.order-form,.form,.faq details{background:linear-gradient(145deg,#1b2822,#17211c);border-color:#35443b;border-radius:5px}
-.field input,.field select,.field textarea,.filters input,.filters select{background:#111a16;border-color:#46564b;border-radius:4px;color:var(--white)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
-
-.hero{padding:clamp(65px,9vw,120px) 0 35px}.hero h1{font-size:clamp(3rem,7vw,6.4rem);letter-spacing:-.075em;line-height:.94}
-.card{transition:transform .3s,border-color .3s}.card:hover{transform:translateY(-5px);border-color:#b88758}.card img{filter:saturate(.78)}.body{padding:24px}.empty{border-radius:4px;border-color:#8d6c4a}
+.empty{display:none;margin:10px 0 80px;padding:34px;border:1px dashed #8d6c4a;border-radius:5px;color:var(--muted);background:rgba(25,35,31,.55)}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.84rem;background:#0d1511}
+footer a{color:var(--gold-light);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card img{height:230px}}
+@media(max-width:640px){.wrap{width:calc(100% - 32px)}.nav{height:68px}.nav a:last-child{font-size:.84rem}.hero{min-height:0;padding:68px 0 30px}.hero h1{font-size:clamp(3.1rem,13.5vw,5.2rem);margin:17px 0 18px}.hero p{font-size:.96rem;line-height:1.68}.filters{grid-template-columns:1fr;gap:10px;margin:24px 0 26px}.filters input,.filters select{min-height:52px}.grid{grid-template-columns:1fr;gap:16px;padding:4px 0 64px}.card img{height:clamp(220px,62vw,300px)}.body{padding:22px}.body p{min-height:0}.empty{margin-bottom:64px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 </style></head><body>
 <header class="top"><div class="wrap nav"><a class="brand" href="index.html">РАЧНЫЙ <span>ДВОР</span></a><a href="index.html">← На главную</a></div></header>
 <main class="wrap"><section class="hero"><div class="eyebrow">Выбор начинается здесь</div><h1>Каталог раков</h1><p>Выберите подходящий формат, откройте карточку товара и уточните актуальное наличие. Цены, размеры и параметры необходимо заполнить по фактическому ассортименту.</p>
 <div class="filters"><input id="search" type="search" placeholder="Найти вариант…" aria-label="Поиск по каталогу"><select id="category" aria-label="Фильтр по категории"><option value="all">Все варианты</option><option value="classic">Классический выбор</option><option value="company">Для компании</option><option value="custom">Индивидуальный заказ</option></select></div></section>
 <section class="grid" id="products" aria-label="Товары каталога"></section><div id="empty" class="empty">По вашему запросу ничего не найдено. Попробуйте изменить фильтр.</div></main>
-<footer><div class="wrap">© <span id="year"></span> Рачный двор · <a href="index.html">Главная страница</a></div></footer>
+<footer><div class="wrap">© <span id="year"></span> Рачный двор · Ульяновск, пр-т Туполева, 33А · <a href="tel:+79510937272">+7 (951) 093-72-72</a> · <a href="https://t.me/+79510937272" target="_blank" rel="noopener noreferrer">Telegram</a> · <a href="index.html">Главная страница</a></div></footer>
 <script>
 const search=document.getElementById('search'),category=document.getElementById('category'),grid=document.getElementById('products'),empty=document.getElementById('empty');
 let products=[];
-function render(){const q=search.value.toLocaleLowerCase('ru'),cat=category.value;grid.innerHTML='';let shown=0;products.filter(p=>p.available!==false&&(cat==='all'||p.id===cat||p.category===cat)&&`${p.name} ${p.description} ${p.category}`.toLocaleLowerCase('ru').includes(q)).forEach(p=>{shown++;const card=document.createElement('article');card.className='card';const img=document.createElement('img');img.src=p.image||'';img.alt='Фотография: '+p.name;img.loading='lazy';const body=document.createElement('div');body.className='body';const tag=document.createElement('span');tag.className='tag';tag.textContent=p.tag||p.category||'ТОВАР';const h=document.createElement('h2');h.textContent=p.name;const desc=document.createElement('p');desc.textContent=p.description||'';const meta=document.createElement('div');meta.className='meta';meta.textContent=p.price!==''&&p.price!=null?`${p.price} ₽ / ${p.unit||'ед.'}`:'Цена и наличие уточняются';const actions=document.createElement('div');actions.className='actions';const a=document.createElement('a');a.className='btn';a.href='product.html?id='+encodeURIComponent(p.id);a.textContent='Подробнее';actions.append(a);body.append(tag,h,desc,meta,actions);card.append(img,body);grid.append(card);});empty.style.display=shown?'none':'block';}
+function render(){const q=search.value.toLocaleLowerCase('ru'),cat=category.value;grid.innerHTML='';let shown=0;products.filter(p=>p.available!==false&&(cat==='all'||p.id===cat||p.category===cat)&&`${p.name} ${p.description} ${p.category}`.toLocaleLowerCase('ru').includes(q)).forEach(p=>{shown++;const card=document.createElement('article');card.className='card';const img=document.createElement('img');img.src=p.image||'assets/raki/small.png';img.alt='Фотография: '+p.name;img.loading='lazy';const body=document.createElement('div');body.className='body';const tag=document.createElement('span');tag.className='tag';tag.textContent=p.tag||p.category||'ТОВАР';const h=document.createElement('h2');h.textContent=p.name;const desc=document.createElement('p');desc.textContent=p.description||'';const meta=document.createElement('div');meta.className='meta';meta.textContent=p.price!==''&&p.price!=null?`${p.price} ₽ / ${p.unit||'ед.'}`:'Цена и наличие уточняются';const actions=document.createElement('div');actions.className='actions';const a=document.createElement('a');a.className='btn';a.href='product.html?id='+encodeURIComponent(p.id);a.textContent='Подробнее';actions.append(a);body.append(tag,h,desc,meta,actions);card.append(img,body);grid.append(card);});empty.style.display=shown?'none':'block';}
 search.addEventListener('input',render);category.addEventListener('change',render);document.getElementById('year').textContent=new Date().getFullYear();
-(async()=>{try{const r=await fetch('/api/catalog',{cache:'no-store'});if(!r.ok)throw Error('catalog');const data=await r.json();products=data.products||[];}catch{products=[];}render();})();
+(async()=>{try{let r=await fetch('/api/catalog',{cache:'no-store'});if(!r.ok)throw Error('catalog api');let data=await r.json();products=data.products||[];}catch{try{const r=await fetch('data.json',{cache:'no-store'});if(!r.ok)throw Error('catalog file');const data=await r.json();products=data.products||[];}catch{products=[];}}render();})();
 </script></body></html>
