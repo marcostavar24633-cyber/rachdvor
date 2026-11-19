@@ -43,6 +43,45 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card img{height:230px}}
 @media(max-width:640px){.wrap{width:calc(100% - 32px)}.nav{height:68px}.nav a:last-child{font-size:.84rem}.hero{min-height:0;padding:68px 0 30px}.hero h1{font-size:clamp(3.1rem,13.5vw,5.2rem);margin:17px 0 18px}.hero p{font-size:.96rem;line-height:1.68}.filters{grid-template-columns:1fr;gap:10px;margin:24px 0 26px}.filters input,.filters select{min-height:52px}.grid{grid-template-columns:1fr;gap:16px;padding:4px 0 64px}.card img{height:clamp(220px,62vw,300px)}.body{padding:22px}.body p{min-height:0}.empty{margin-bottom:64px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Master Prompt 3.1 — catalogue as a photographic editorial spread */
+.hero{
+ min-height:390px;padding:clamp(72px,10vw,132px) 0 54px;
+ background:
+  linear-gradient(90deg,rgba(7,15,11,.96) 0%,rgba(8,16,12,.82) 44%,rgba(9,17,13,.42) 100%),
+  linear-gradient(0deg,#101916 0%,transparent 55%),
+  url('assets/raki/hero.png') center 48%/cover no-repeat,
+  #101916;
+ border:0;
+}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 76% 45%,rgba(219,163,111,.18),transparent 36%)}
+.hero:after{right:-180px;top:auto;bottom:-470px;width:760px;height:760px}
+.hero h1{max-width:900px;font-size:clamp(3.8rem,8.5vw,7.6rem);text-shadow:0 12px 48px rgba(0,0,0,.28)}
+.hero p{max-width:610px;color:rgba(245,240,230,.86)}
+.filters{position:relative;margin-top:34px;padding:14px;border:1px solid rgba(213,163,108,.2);border-radius:7px;background:rgba(18,29,23,.88);box-shadow:0 18px 54px rgba(0,0,0,.22);backdrop-filter:blur(16px)}
+.filters input,.filters select{border-radius:4px;background:rgba(8,17,12,.68)}
+.grid{align-items:stretch;gap:22px;padding-top:10px}
+.card{border-radius:7px;background:linear-gradient(155deg,rgba(29,43,35,.98),rgba(17,27,21,.98));box-shadow:0 18px 48px rgba(0,0,0,.2)}
+.card:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid rgba(236,194,146,.035);border-radius:inherit}
+.card img{height:clamp(230px,24vw,310px);filter:saturate(.82) contrast(1.06)}
+.card:hover{transform:translateY(-8px);border-color:rgba(221,166,112,.72);box-shadow:0 28px 64px rgba(0,0,0,.34),0 0 36px rgba(213,163,108,.08)}
+.body{padding:25px}
+.body h2{font-size:clamp(1.3rem,2vw,1.65rem)}
+.body p{min-height:78px}
+.meta{color:#efcfaa}
+.actions .btn{min-width:148px}
+.empty{border-radius:7px}
+@media(max-width:640px){
+ .hero{min-height:360px;padding:72px 0 38px;background-position:58% center}
+ .hero h1{font-size:clamp(3.4rem,14vw,5.2rem)}
+ .filters{padding:10px;margin-top:24px}
+ .grid{gap:17px}
+ .card img{height:clamp(245px,72vw,340px)}
+ .body{padding:22px}
+ .body p{min-height:0}
+}
+@media(prefers-reduced-motion:reduce){.card img,.card{transition:none}}
+
 </style></head><body>
 <header class="top"><div class="wrap nav"><a class="brand" href="index.html">РАЧНЫЙ <span>ДВОР</span></a><a href="index.html">← На главную</a></div></header>
 <main class="wrap"><section class="hero"><div class="eyebrow">Выбор начинается здесь</div><h1>Каталог раков</h1><p>Выберите подходящий формат, откройте карточку товара и уточните актуальное наличие. Цены, размеры и параметры необходимо заполнить по фактическому ассортименту.</p>
