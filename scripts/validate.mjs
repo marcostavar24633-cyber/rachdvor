@@ -6,7 +6,12 @@ import { isAllowedCatalogImage, isCatalogProductRecord } from "../functions/api/
 
 assert.equal(isAllowedCatalogImage("assets/raki/hero.png"), true);
 assert.equal(isAllowedCatalogImage("https://cdn.example.com/image.jpg"), true);
-assert.equal(isAllowedCatalogImage(""), true);\nassert.equal(isCatalogProductRecord({ id: "sample", name: "Товар" }), true);\nassert.equal(isCatalogProductRecord(null), false);\nassert.equal(isCatalogProductRecord(undefined), false);\nassert.equal(isCatalogProductRecord("товар"), false);\nassert.equal(isCatalogProductRecord([]), false);
+assert.equal(isAllowedCatalogImage(""), true);
+assert.equal(isCatalogProductRecord({ id: "sample", name: "Товар" }), true);
+assert.equal(isCatalogProductRecord(null), false);
+assert.equal(isCatalogProductRecord(undefined), false);
+assert.equal(isCatalogProductRecord("товар"), false);
+assert.equal(isCatalogProductRecord([]), false);
 for (const unsafe of ["../secret.png", "assets/../secret.png", "assets/raki/../../secret.png", "/assets/raki/hero.png", "//evil.example/image.png", "javascript:alert(1)", "data:image/png;base64,AA=="]) {
   assert.equal(isAllowedCatalogImage(unsafe), false, `Unsafe catalog image path accepted: ${unsafe}`);
 }
