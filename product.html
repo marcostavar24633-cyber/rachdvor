@@ -102,13 +102,16 @@ document.getElementById('request').addEventListener('submit',async e=>{
  e.preventDefault();const quantity=document.getElementById('quantity').value.trim()||'не указано';
  const contact=document.getElementById('contact').value.trim(),comment=document.getElementById('comment').value.trim()||'нет',status=document.getElementById('status');
  const payload={name:'',contact,comment,delivery:'Уточнить у продавца',items:[{id:item.id,name:item.name,option:'Уточнить доступные варианты',quantity,unit:item.unit||''}]};
+ const message='Здравствуйте! Интересует: '+item.name+'. Количество: '+quantity+'. Контакт: '+contact+'. Комментарий: '+comment+'. Подскажите наличие, стоимость и условия получения.';
  status.textContent='Отправляем запрос…';
  try{const response=await fetch('/api/order',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});const result=await response.json();
-  if(response.ok&&result.saved){status.textContent='Запрос сохранён. Номер: '+result.orderId+'. '+(result.notificationSent?'Уведомление отправлено продавцу.':'Продавец пока не получил уведомление — свяжитесь с ним для подтверждения.');e.target.reset();return;}
-  if(response.ok&&!result.saved){status.textContent='Запрос проверен, но не сохранён: хранилище заявок не подключено. Свяжитесь с продавцом напрямую.';return;}
-  status.textContent=result.error||'Не удалось отправить запрос. Попробуйте ещё раз.';
- }catch{const message='Здравствуйте! Интересует: '+item.name+'. Количество: '+quantity+'. Контакт: '+contact+'. Комментарий: '+comment+'. Подскажите наличие, стоимость и условия получения.';
-  try{await navigator.clipboard.writeText(message);status.textContent='Сервер недоступен. Текст запроса скопирован — отправьте его продавцу.';}catch{status.textContent='Сервер недоступен. Запрос: '+message;}
+  if(response.ok&&result.saved){status.textContent='Запрос сохранён. Номер: '+result.orderId+'. '+(result.notificationSent?'Уведомление отправлено продавцу.':'Уведомление не отправлено — подтвердите запрос по контактам внизу страницы.');e.target.reset();return;}
+  const reason=result.error||'Не удалось сохранить запрос.';
+  try{await navigator.clipboard.writeText(message);status.textContent=reason+' Текст запроса скопирован. Отправьте его продавцу по контактам внизу страницы.';}
+  catch{status.textContent=reason+' Текст запроса: '+message;}
+ }catch{
+  try{await navigator.clipboard.writeText(message);status.textContent='Сервер недоступен. Текст запроса скопирован — отправьте его продавцу по контактам внизу страницы.';}
+  catch{status.textContent='Сервер недоступен. Текст запроса: '+message;}
  }
 });
 })();
