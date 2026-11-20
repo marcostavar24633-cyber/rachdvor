@@ -3,6 +3,19 @@ import { requireAdmin, adminJson } from "../_lib/admin-auth.js";
 const KEY = "catalog:data";
 const MAX_BYTES = 100 * 1024;
 
+export function isCatalogProductRecord(item) {
+  return Boolean(item && typeof item === "object" && !Array.isArray(item));
+}
+
+export function isAllowedCatalogImage(value) {
+  const image = String(value || "").trim();
+  if (!image) return true;
+  if (/^https:\/\//i.test(image)) return true;
+  // Permit repository-local assets while rejecting absolute paths and traversal.
+  return /^assets\/[A-Za-z0-9_-]+(?:\/[A-Za-z0-9._-]+)*$/.test(image) &&
+    !image.split("/").some(segment => segment === "." || segment === "..");
+}
+
 export async function onRequestGet({ request, env }) {
   try {
     const stored = env.ORDERS_KV ? await env.ORDERS_KV.get(KEY) : null;
@@ -77,7 +90,7 @@ export async function onRequestPut({ request, env }) {
     const price = item.price === "" || item.price == null ? "" : Number(item.price);
     if (price !== "" && (!Number.isFinite(price) || price < 0 || price > 100000000)) return adminJson({ ok: false, error: "Некорректная цена товара: " + name }, 400);
     const image = String(item.image || "").trim();
-    if (image && !/^https:\/\//i.test(image)) return adminJson({ ok: false, error: "Для фотографий используйте HTTPS-ссылки." }, 400);
+    if (!isAllowedCatalogImage(image)) return adminJson({ ok: false, error: "Для фотографий используйте HTTPS-ссылки или локальные файлы из папки assets/." }, 400);
     products.push({
       id, name,
       category: String(item.category || "").slice(0, 80),

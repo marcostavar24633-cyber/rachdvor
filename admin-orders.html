@@ -104,7 +104,7 @@ function render(){
 document.querySelector('#refresh').addEventListener('click',()=>load(true));
 loadMoreButton.addEventListener('click',()=>load(false));
 filter.addEventListener('change',render);
-document.querySelector('#logout').addEventListener('click',async()=>{await fetch('/api/admin-logout',{method:'POST',credentials:'same-origin'});location.href='/admin-login.html';});
+document.querySelector('#logout').addEventListener('click',async event=>{const button=event.currentTarget;button.disabled=true;button.textContent='Выходим…';try{await fetch('/api/admin-logout',{method:'POST',credentials:'same-origin'});}catch{}finally{location.replace('/admin-login.html');}});
 load(true);
 </script>
 </body></html>

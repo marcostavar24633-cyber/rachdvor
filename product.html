@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#11120f"><meta name="description" content="Карточка товара магазина «Рачный двор». Уточните параметры, наличие и стоимость у продавца."><title>Товар — Рачный двор</title><link rel="icon" href="favicon.svg" type="image/svg+xml">
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101916"><meta name="description" content="Карточка товара магазина «Рачный двор». Уточните параметры, наличие и стоимость у продавца."><title>Товар — Рачный двор</title><link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 :root{--bg:#11120f;--surface:#1b1d19;--gold:#d8b66e;--gold2:#f0d99d;--text:#f7f3e9;--muted:#b9b8ad;--line:#383a31;--max:1050px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(var(--max),calc(100% - 36px));margin:auto}.nav{height:72px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{font-weight:900;letter-spacing:.1em}.brand span{color:var(--gold)}.nav a:last-child{color:var(--gold2)}main{padding:45px 0 80px}.crumb{font-size:.85rem;color:var(--muted);margin-bottom:22px}.product{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start}.photo{border:1px solid var(--line);border-radius:24px;overflow:hidden}.photo img{width:100%;height:440px;object-fit:cover}.tag{color:var(--gold);font-size:.75rem;font-weight:850;letter-spacing:.15em}.info h1{font-size:clamp(2.2rem,5vw,3.7rem);line-height:1.02;letter-spacing:-.05em;margin:12px 0}.info p{color:var(--muted)}.facts{display:grid;gap:0;margin:22px 0;border-block:1px solid var(--line)}.fact{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #ffffff12}.fact:last-child{border:0}.fact span{color:var(--muted)}.form{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:24px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:.82rem;color:#cbc7ba}.field input,.field select,.field textarea{width:100%;min-height:44px;background:#11130f;border:1px solid #4a4b40;border-radius:11px;padding:10px;color:var(--text);font:inherit}.btn{width:100%;display:inline-flex;justify-content:center;align-items:center;min-height:50px;border-radius:999px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#17170f;font-weight:850;border:0;cursor:pointer}.note{font-size:.8rem;color:var(--muted)}.status{color:var(--gold2);font-size:.85rem}footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:.83rem}
 @media(max-width:760px){.product{grid-template-columns:1fr}.photo img{height:300px}}
@@ -41,6 +41,46 @@ footer{background:#0d1511;border-top:1px solid #35443b;padding:25px 0;color:#b8c
 footer a{color:#f1d4aa;text-underline-offset:4px}
 @media(max-width:760px){.nav{height:68px}.product{gap:26px}.photo img{height:clamp(260px,72vw,390px)}.info h1{font-size:clamp(2.9rem,13vw,4.8rem)}main{padding-top:32px}}
 @media(prefers-reduced-motion:reduce){.photo img{transition:none}}
+
+/* Master Prompt 3.1 — product detail as a cinematic editorial feature */
+body{background:
+ radial-gradient(ellipse at 12% 24%,rgba(187,129,78,.08),transparent 34%),
+ linear-gradient(180deg,#101916 0%,#111c16 58%,#0d1511 100%)}
+main{position:relative}
+.product{gap:clamp(28px,5vw,66px);align-items:start}
+.photo{isolation:isolate;overflow:hidden;border-radius:7px;border-color:rgba(221,166,112,.48);box-shadow:0 28px 72px rgba(0,0,0,.34),0 0 64px rgba(213,163,108,.09)}
+.photo:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(0deg,rgba(7,14,10,.28),transparent 48%),radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(5,12,8,.18) 100%);box-shadow:inset 0 0 0 1px rgba(240,201,155,.12)}
+.photo img{height:clamp(380px,48vw,620px);filter:saturate(.84) contrast(1.07);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.photo:hover img{transform:scale(1.035)}
+.info{padding-top:clamp(0px,2vw,24px);animation:product-copy-in .8s cubic-bezier(.2,.7,.2,1) both}
+.info h1{max-width:700px;text-shadow:0 8px 36px rgba(0,0,0,.22)}
+.info>p{font-size:1.02rem}
+.facts{padding:7px 0;border-block-color:rgba(213,163,108,.23)}
+.fact{padding:15px 2px;border-bottom-color:rgba(255,255,255,.075)}
+.fact b{font-size:.92rem}
+.fact span{max-width:58%;font-size:.92rem}
+.form{position:relative;overflow:hidden;margin-top:30px;padding:clamp(20px,3vw,30px);border-radius:7px;border-color:rgba(213,163,108,.27);background:linear-gradient(145deg,rgba(31,45,36,.98),rgba(18,29,22,.98));box-shadow:0 22px 58px rgba(0,0,0,.2)}
+.form:before{content:"";position:absolute;right:-100px;top:-140px;width:260px;height:260px;border:1px solid rgba(213,163,108,.13);border-radius:50%;box-shadow:0 0 70px rgba(213,163,108,.06)}
+.form h2{position:relative;margin:0 0 18px;font-size:1.45rem;letter-spacing:-.035em}
+.field{position:relative;gap:8px;margin:15px 0}
+.field label{color:#d6d4c8;font-size:.82rem;letter-spacing:.02em}
+.field input,.field select,.field textarea{min-height:50px;padding:12px 14px;border-radius:5px;background:rgba(8,17,12,.68);border-color:#526256;transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:#d5a36c;box-shadow:0 0 0 3px rgba(213,163,108,.13)}
+.form .btn{position:relative;overflow:hidden;min-height:56px;border-radius:5px;box-shadow:0 12px 30px rgba(0,0,0,.2);transition:transform .2s,filter .2s,box-shadow .2s}
+.form .btn:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 16px 36px rgba(0,0,0,.3)}
+.note{line-height:1.6}
+.status{min-height:1.5em;line-height:1.5}
+@keyframes product-copy-in{from{opacity:0;transform:translateY(18px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@media(max-width:760px){
+ main{padding-top:28px}
+ .product{gap:24px}
+ .photo img{height:clamp(280px,88vw,430px)}
+ .info{padding-top:4px}
+ .info h1{font-size:clamp(3rem,13vw,4.9rem)}
+ .form{margin-top:24px}
+}
+@media(prefers-reduced-motion:reduce){.info{animation:none}.photo img{transition:none}}
+
 </style></head><body><header><div class="wrap nav"><a class="brand" href="index.html">РАЧНЫЙ <span>ДВОР</span></a><a href="catalog.html">← В каталог</a></div></header>
 <main class="wrap"><div class="crumb"><a href="index.html">Главная</a> / <a href="catalog.html">Каталог</a> / <span id="crumbName">Товар</span></div>
 <div class="product"><div class="photo"><img id="productImage" src="" alt="" fetchpriority="high"></div><section class="info"><div class="tag" id="productTag"></div><h1 id="productName">Загрузка…</h1><p id="productDescription"></p>
@@ -62,13 +102,16 @@ document.getElementById('request').addEventListener('submit',async e=>{
  e.preventDefault();const quantity=document.getElementById('quantity').value.trim()||'не указано';
  const contact=document.getElementById('contact').value.trim(),comment=document.getElementById('comment').value.trim()||'нет',status=document.getElementById('status');
  const payload={name:'',contact,comment,delivery:'Уточнить у продавца',items:[{id:item.id,name:item.name,option:'Уточнить доступные варианты',quantity,unit:item.unit||''}]};
+ const message='Здравствуйте! Интересует: '+item.name+'. Количество: '+quantity+'. Контакт: '+contact+'. Комментарий: '+comment+'. Подскажите наличие, стоимость и условия получения.';
  status.textContent='Отправляем запрос…';
  try{const response=await fetch('/api/order',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});const result=await response.json();
-  if(response.ok&&result.saved){status.textContent='Запрос сохранён. Номер: '+result.orderId+'. '+(result.notificationSent?'Уведомление отправлено продавцу.':'Продавец пока не получил уведомление — свяжитесь с ним для подтверждения.');e.target.reset();return;}
-  if(response.ok&&!result.saved){status.textContent='Запрос проверен, но не сохранён: хранилище заявок не подключено. Свяжитесь с продавцом напрямую.';return;}
-  status.textContent=result.error||'Не удалось отправить запрос. Попробуйте ещё раз.';
- }catch{const message='Здравствуйте! Интересует: '+item.name+'. Количество: '+quantity+'. Контакт: '+contact+'. Комментарий: '+comment+'. Подскажите наличие, стоимость и условия получения.';
-  try{await navigator.clipboard.writeText(message);status.textContent='Сервер недоступен. Текст запроса скопирован — отправьте его продавцу.';}catch{status.textContent='Сервер недоступен. Запрос: '+message;}
+  if(response.ok&&result.saved){status.textContent='Запрос сохранён. Номер: '+result.orderId+'. '+(result.notificationSent?'Уведомление отправлено продавцу.':'Уведомление не отправлено — подтвердите запрос по контактам внизу страницы.');e.target.reset();return;}
+  const reason=result.error||'Не удалось сохранить запрос.';
+  try{await navigator.clipboard.writeText(message);status.textContent=reason+' Текст запроса скопирован. Отправьте его продавцу по контактам внизу страницы.';}
+  catch{status.textContent=reason+' Текст запроса: '+message;}
+ }catch{
+  try{await navigator.clipboard.writeText(message);status.textContent='Сервер недоступен. Текст запроса скопирован — отправьте его продавцу по контактам внизу страницы.';}
+  catch{status.textContent='Сервер недоступен. Текст запроса: '+message;}
  }
 });
 })();

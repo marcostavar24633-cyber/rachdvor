@@ -10,7 +10,7 @@
       "price": "",
       "unit": "кг",
       "available": true,
-      "image": "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1100&q=85",
+      "image": "assets/raki/pile.png",
       "tag": "КЛАССИЧЕСКИЙ ВЫБОР"
     },
     {
@@ -21,7 +21,7 @@
       "price": "",
       "unit": "заказ",
       "available": true,
-      "image": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=1100&q=85",
+      "image": "assets/raki/pan.png",
       "tag": "ДЛЯ КОМПАНИИ"
     },
     {
@@ -32,7 +32,7 @@
       "price": "",
       "unit": "заказ",
       "available": true,
-      "image": "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=1100&q=85",
+      "image": "assets/raki/select.png",
       "tag": "ПОД ВАШ ПОВОД"
     }
   ],

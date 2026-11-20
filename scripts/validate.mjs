@@ -1,10 +1,49 @@
-import { readdir, readFile } from "node:fs/promises";
-import { join, extname } from "node:path";
+import { access, readdir, readFile } from "node:fs/promises";
+import { dirname, join, extname, normalize, sep } from "node:path";
 import { spawnSync } from "node:child_process";
+import assert from "node:assert/strict";
+import { isAllowedCatalogImage, isCatalogProductRecord } from "../functions/api/catalog.js";
+
+assert.equal(isAllowedCatalogImage("assets/raki/hero.png"), true);
+assert.equal(isAllowedCatalogImage("https://cdn.example.com/image.jpg"), true);
+assert.equal(isAllowedCatalogImage(""), true);
+assert.equal(isCatalogProductRecord({ id: "sample", name: "Товар" }), true);
+assert.equal(isCatalogProductRecord(null), false);
+assert.equal(isCatalogProductRecord(undefined), false);
+assert.equal(isCatalogProductRecord("товар"), false);
+assert.equal(isCatalogProductRecord([]), false);
+for (const unsafe of ["../secret.png", "assets/../secret.png", "assets/raki/../../secret.png", "/assets/raki/hero.png", "//evil.example/image.png", "javascript:alert(1)", "data:image/png;base64,AA=="]) {
+  assert.equal(isAllowedCatalogImage(unsafe), false, `Unsafe catalog image path accepted: ${unsafe}`);
+}
 
 const root = process.cwd();
 const errors = [];
 const checked = [];
+
+async function verifyLocalReference(raw, label) {
+  const value = String(raw || "").trim();
+  if (!value || /^(?:https?:|mailto:|tel:|data:|javascript:|#|\/\/)/i.test(value)) return;
+  let pathname;
+  try {
+    pathname = decodeURIComponent(value.split(/[?#]/, 1)[0]);
+  } catch {
+    errors.push(label + ": invalid URL encoding in local reference: " + value);
+    return;
+  }
+  if (!pathname || pathname.startsWith("/api/")) return;
+  const target = pathname === "/" ? "index.html" :
+    normalize(pathname.startsWith("/") ? pathname.slice(1) : join(dirname(label), pathname));
+  if (target === ".." || target.startsWith(".." + sep)) {
+    errors.push(label + ": local reference escapes repository: " + value);
+    return;
+  }
+  try {
+    await access(join(root, target));
+  } catch {
+    errors.push(label + ": missing local reference: " + value);
+  }
+}
+
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -36,9 +75,25 @@ for (const file of files) {
   const ext = extname(file).toLowerCase();
   const source = await readFile(file, "utf8");
 
+  if (ext === ".html") {
+    for (const match of source.matchAll(/\b(?:src|href)\s*=\s*(["'])(.*?)\1/gi)) {
+      await verifyLocalReference(match[2], relative);
+    }
+    for (const styleBlock of source.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style\s*>/gi)) {
+      for (const match of styleBlock[1].matchAll(/url\(\s*(["']?)(.*?)\1\s*\)/gi)) {
+        await verifyLocalReference(match[2], relative);
+      }
+    }
+  }
+
   if (ext === ".json") {
     try {
-      JSON.parse(source);
+      const data = JSON.parse(source);
+      if (relative === "data.json" && Array.isArray(data.products)) {
+        for (const product of data.products) {
+          if (product.image) await verifyLocalReference(product.image, relative);
+        }
+      }
       checked.push(relative + " (JSON)");
     } catch (error) {
       errors.push(`${relative}: invalid JSON: ${error.message}`);
